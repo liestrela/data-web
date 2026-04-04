@@ -1,5 +1,11 @@
 # data-web
 
+For development:
+
+```bash
+bun dev
+```
+
 To install dependencies:
 
 ```bash
