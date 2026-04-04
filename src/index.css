@@ -1,0 +1,142 @@
+:root {
+	--main-fg-color: rgba(255, 255, 255, 0.94);
+	--main-bg-color: #3d3d3d;
+	--inp-bg-color: rgba(0, 0, 0, 0.2);
+
+	font-family: Inter, Helvetica, Arial, sans-serif;
+	color-scheme: light dark;
+	color: var(--main-fg-color);
+	background-color: var(--main-bg-color);
+}
+
+body {
+	margin: 0;
+	position: relative;
+	display: grid;
+	place-items: center;
+	min-width: 320px;
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	opacity: 0.05;
+	transform: rotate(-12deg) scale(1.35);
+	animation: slide 30s linear infinite;
+	pointer-events: none;
+}
+
+h1 {
+	margin: 0;
+}
+
+.app {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+}
+
+.review-manager {
+	margin: 2rem auto 0;
+	width: 100%;
+	max-width: 600px;
+}
+
+.review-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.subject-input {
+	width: 100%;
+	display: flex;
+	background: var(--inp-bg-color); 
+	padding: 0.60rem;
+	border-radius: 15px;
+	align-items: center;
+	transition: 0.3s;
+	gap: 0.5rem;
+	margin: 0.2rem;
+}
+
+.subject-input input {
+	color: var(--main-fg-color);
+	background: none;
+	border: none;
+	width: 100%;
+	flex: 1;
+	padding: 0.2rem;
+	outline: none;
+}
+
+.save-btn {
+	background: #45718d;
+	color: var(--main-fg-color);
+	border: 0;
+	padding: 0.4rem 1.2rem;
+	border-radius: 8px;
+}
+
+.save-btn:hover {
+	transform: translateY(-1.5px);
+	cursor: pointer;
+}
+
+.review-header {
+	font-size: 1.5em;
+	margin: 0.8rem 0 0.8rem 0;
+}
+
+.review-period {
+	display: flex;
+	gap: 0.6em;
+	align-items: center;
+}
+
+.many-input, .unit-input {
+	background-color: var(--inp-bg-color);
+	color: var(--main-fg-color);
+
+	border: 0;
+	padding: 0.6rem;
+	border-radius: 15px;
+
+	field-sizing: content;
+	min-width: 30px;
+}
+
+/*
+.many-input::-webkit-outer-spin-button,
+.many-input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.many-input[type=number] {
+	-moz-appearance: textfield;
+}
+*/
+
+@keyframes slide {
+	from {
+		background-position: 0 0;
+	}
+
+	to {
+		background-position: 256px 224px;
+	}
+}
+
+@media (prefers-reduced-motion) {
+	*,
+	::before,
+	::after {
+		animation: none !important;
+	}
+}
