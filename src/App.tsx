@@ -1,13 +1,11 @@
-import { ReviewManager } from "./ReviewManager";
-import "./index.css"
+import { ReviewManager } from "./components/ReviewManager";
+import "./index.css";
 
 export function App() {
-	return (
-		<div className="app">
-			<h1>Calendário de Revisões</h1>
-			<ReviewManager />
-		</div>
-	);
+  return (
+    <div className="app">
+      <h1>Calendário de Revisões</h1>
+      <ReviewManager />
+    </div>
+  );
 }
-
-export default App;
