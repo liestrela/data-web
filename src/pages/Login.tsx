@@ -1,10 +1,17 @@
 import { useState } from "react";
-import './Login.css'
+import './Login-Register.css'
 
 export function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
+  // Setar a falha do login deve ser feito no login
+  // Seria bom trazer erro de nome de usuario inexiste 
+  // senha errada etc
+  const [loginFail, setLoginFail] = useState(false)
+
+  const login = () => {
+
+  }
 
   return (
     <div className="login-page">
@@ -13,21 +20,31 @@ export function Login() {
         id="username-login"
         type="text"
         value={userName}
-        className="username-login"
+        className="subject-input"
+        style={{border : 'none'}}
         onChange={(e) => setUserName(e.target.value)}
         placeholder="Digite o seu nome de usuário"
         />
       <label htmlFor="password-login">Senha:</label>
       <input
-        id="password-login" 
-        type={isVisible ? "text" : "password"} 
+        id="password-login"
+        type="password"
         value={password}
+        className="subject-input"
+        style={{border : 'none'}}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Digite a sua senha"
       />
-      <button onClick={() => setIsVisible(!isVisible)}>
-        {isVisible ? "Esconder" : "Mostrar"}
+      <a href="">Esqueceu a senha?</a>
+      <button
+        className="save-btn"
+      >
+        Logar
       </button>
+      {loginFail && (
+        <p className="fail-text">Login falhou</p>
+      )}
+      <a href="">Não tem uma conta? <br />Clique aqui para registrar.</a>
 
     </div>
   )
