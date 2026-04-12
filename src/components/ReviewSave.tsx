@@ -55,14 +55,7 @@ export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
       </form>
       <div className="review-periods-container">
         <div className="review-header">
-          <span>Devo revisar isso:</span>
-          <button
-            type="button"
-            className="add-period-btn"
-            onClick={handleAddPeriod}
-          >
-            + Adicionar período
-          </button>
+          <span>Devo revisar isso</span>
         </div>
         {periods.map((period, index) => (
           <ReviewPeriodInput
@@ -73,6 +66,13 @@ export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
             canRemove={periods.length > 1}
           />
         ))}
+        <button
+          type="button"
+          className="add-period-btn"
+          onClick={handleAddPeriod}
+        >
+          +
+        </button>
       </div>
     </div>
   );

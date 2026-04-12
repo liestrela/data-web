@@ -37,16 +37,15 @@ export function ReviewPeriodInput({
         <option value="semanas">semanas</option>
         <option value="meses">meses</option>
       </select>
-      {canRemove && (
         <button
           type="button"
           className="remove-btn"
           onClick={onRemove}
           title="Remover período"
+          disabled={!canRemove}
         >
-          X
+          x
         </button>
-      )}
     </div>
   );
 }
