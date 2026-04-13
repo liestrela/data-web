@@ -23,7 +23,6 @@ body::before {
   inset: 0;
   z-index: -1;
   opacity: 0.05;
-  transform: rotate(-12deg) scale(1.35);
   animation: slide 30s linear infinite;
   pointer-events: none;
 }
@@ -44,13 +43,16 @@ h1 {
   text-align: center;
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 .review-manager {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin: 2rem auto 0;
   width: 100%;
   max-width: 600px;
 }
@@ -59,6 +61,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 15px;
 }
 
 .review-periods-container {
@@ -138,7 +141,6 @@ h1 {
 
 .review-header {
   font-size: 1.5em;
-  margin: 0.8rem 0 0.8rem 0;
 }
 
 .review-period {
@@ -159,9 +161,6 @@ h1 {
   border: 0;
   padding: 0.6rem;
   border-radius: 15px;
-
-  field-sizing: content;
-  min-width: 30px;
 }
 
 .review-list {
@@ -172,7 +171,7 @@ h1 {
 }
 
 .review-card {
-  background-color: #ffffff;
+  background-color: var(--inp-bg-color);
   border: 1px solid #eaeaea;
   border-radius: 8px;
   padding: 1.25rem;
@@ -189,6 +188,8 @@ h1 {
 }
 
 .review-card-header {
+  display: flex;
+  flex-direction: row;
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 0.75rem;
 }
@@ -196,8 +197,9 @@ h1 {
 .review-subject {
   margin: 0;
   font-size: 1.125rem;
-  color: #333333;
   font-weight: 600;
+  color: var(--main-fg-color);
+  flex: 1;
 }
 
 .period-list {
@@ -210,8 +212,8 @@ h1 {
 }
 
 .period-badge {
-  background-color: #e0f2fe;
-  color: #0284c7;
+  background-color: var(--inp-bg-color);
+  color: var(--main-fg-color);
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.75rem;
@@ -221,18 +223,6 @@ h1 {
 .review-viewer.empty {
   color: #c0c0c0;
 }
-
-/*
-.many-input::-webkit-outer-spin-button,
-.many-input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-.many-input[type=number] {
-	-moz-appearance: textfield;
-}
-*/
 
 @keyframes slide {
   from {
