@@ -2,11 +2,16 @@
   --main-fg-color: rgba(255, 255, 255, 0.94);
   --main-bg-color: #3d3d3d;
   --inp-bg-color: rgba(0, 0, 0, 0.2);
+  --main-red: #e74c3c;
 
   font-family: Inter, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
   color: var(--main-fg-color);
   background-color: var(--main-bg-color);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -34,6 +39,18 @@ button:hover:not(:disabled) {
 
 h1 {
   margin: 0;
+}
+
+a {
+  color: #457aaa;
+}
+
+a:active {
+  color: #3a6894;
+}
+
+input {
+  color: var(--main-fg-color);
 }
 
 .app {
@@ -84,7 +101,7 @@ h1 {
 }
 
 .remove-btn {
-  background: #e74c3c;
+  background: var(--main-red);
   color: var(--main-fg-color);
   font-weight: bold;
   border: 0;
@@ -172,10 +189,11 @@ h1 {
 }
 
 .review-card-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  animation: smooth-appear 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .review-card {
@@ -231,10 +249,21 @@ h1 {
 }
 
 .calendar {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.username-login-container,
+.password-login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fail-text {
+    color: var(--main-red);
 }
 
 @keyframes slide {
@@ -245,18 +274,6 @@ h1 {
   to {
     background-position: 256px 224px;
   }
-}
-
-.login-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    gap: 10px;
-    align-items: center;
-}
-
-.fail-text {
-    color: red;
 }
 
 @keyframes smooth-appear {

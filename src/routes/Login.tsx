@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/main.css";
 
 export function Login() {
   const [userName, setUserName] = useState("");
@@ -14,26 +15,31 @@ export function Login() {
 
   return (
     <div className="login-page">
-      <label htmlFor="username-login">Usuário:</label>
-      <input 
-        id="username-login"
-        type="text"
-        value={userName}
-        className="subject-input"
-        style={{border : 'none'}}
-        onChange={(e) => setUserName(e.target.value)}
-        placeholder="Digite o seu nome de usuário"
+      <div className="username-login-container">
+        <label htmlFor="username-login">Usuário:</label>
+        <input 
+          id="username-login"
+          type="text"
+          value={userName}
+          className="subject-input"
+          style={{border : 'none'}}
+          onChange={(e) => setUserName(e.target.value)}
+          placeholder="Digite o seu nome de usuário"
+          />
+      </div>
+
+      <div className="password-login-container">
+        <label htmlFor="password-login">Senha:</label>
+        <input
+          id="password-login"
+          type="password"
+          value={password}
+          className="subject-input"
+          style={{border : 'none'}}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Digite a sua senha"
         />
-      <label htmlFor="password-login">Senha:</label>
-      <input
-        id="password-login"
-        type="password"
-        value={password}
-        className="subject-input"
-        style={{border : 'none'}}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Digite a sua senha"
-      />
+      </div>
       <a href="">Esqueceu a senha?</a>
       <button
         className="save-btn"

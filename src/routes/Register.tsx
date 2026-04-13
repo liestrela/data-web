@@ -1,5 +1,6 @@
 import { useState } from "react";
-import './Login-Register.css'
+
+import "../styles/main.css";
 
 export function Register() {
   const [userName, setUserName] = useState("");
@@ -101,3 +102,5 @@ export function Register() {
     </div>
   )
 }
+
+export default Register;

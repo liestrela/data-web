@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import type { Review } from "../types";
 import { ReviewCard } from "./ReviewCard";
 
@@ -10,6 +12,17 @@ export function ReviewViewer({
   reviews,
   onRemove
 }: ReviewViewerProps) {
+  const cardBottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (reviews.length > 0) {
+      cardBottomRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end"
+      });
+    }
+  }, [reviews.length]);
+
   if (reviews.length === 0) {
     return (
       <div className="review-viewer empty">
@@ -28,6 +41,7 @@ export function ReviewViewer({
 			onRemove={() => onRemove(index)}
 		  />
         ))}
+        <div ref={cardBottomRef} />
       </div>
     </div>
   );
