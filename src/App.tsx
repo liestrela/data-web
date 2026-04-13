@@ -1,11 +1,23 @@
-import { ReviewManager } from "./components/ReviewManager";
-import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import MainPage from "./routes/MainPage";
+import Login from "./routes/Login";
+
+import "./styles/main.css";
+
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <MainPage />,
+	},
+	{
+		path: "/login",
+		element: <Login />,
+	},
+]);
 
 export function App() {
-  return (
-    <div className="app">
-      <h1>Calendário de Revisões</h1>
-      <ReviewManager />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
+
+export default App;

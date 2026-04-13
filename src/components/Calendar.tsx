@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Calendar as ReactCalendar } from "react-calendar";
 
-import "../calendar.css";
+import "../styles/calendar.css";
 
 type DateValuePiece = Date | null;
 type DateValue = DateValuePiece | [DateValuePiece, DateValuePiece];

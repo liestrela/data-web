@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './Login-Register.css'
 
 export function Login() {
   const [userName, setUserName] = useState("");
@@ -49,3 +48,5 @@ export function Login() {
     </div>
   )
 }
+
+export default Login;
