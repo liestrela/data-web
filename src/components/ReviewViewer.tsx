@@ -3,12 +3,18 @@ import { ReviewCard } from "./ReviewCard";
 
 interface ReviewViewerProps {
   reviews: Review[];
+  onRemove: (index: number) => void;
 }
 
-export function ReviewViewer({ reviews }: ReviewViewerProps) {
+export function ReviewViewer({
+  reviews,
+  onRemove
+}: ReviewViewerProps) {
   if (reviews.length === 0) {
     return (
-      <div className="review-viewer empty">Nenhuma revisão cadastrada.</div>
+      <div className="review-viewer empty">
+	  	Nenhuma revisão cadastrada.
+	  </div>
     );
   }
 
@@ -16,7 +22,11 @@ export function ReviewViewer({ reviews }: ReviewViewerProps) {
     <div className="review-viewer">
       <div className="review-list">
         {reviews.map((review, index) => (
-          <ReviewCard key={index} review={review} />
+          <ReviewCard 
+		  	key={index}
+			review={review}
+			onRemove={() => onRemove(index)}
+		  />
         ))}
       </div>
     </div>

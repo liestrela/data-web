@@ -92,6 +92,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   width: 25px;
   height: 25px;
 }
@@ -170,6 +171,13 @@ h1 {
   padding: 1rem 0;
 }
 
+.review-card-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+}
+
 .review-card {
   background-color: var(--inp-bg-color);
   border: 1px solid #eaeaea;
@@ -179,17 +187,16 @@ h1 {
   transition: box-shadow 0.2s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
-}
-
-.review-card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  width: 100%;
 }
 
 .review-card-header {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  width: 100%;
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 0.75rem;
 }
@@ -199,7 +206,6 @@ h1 {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--main-fg-color);
-  flex: 1;
 }
 
 .period-list {
@@ -222,6 +228,13 @@ h1 {
 
 .review-viewer.empty {
   color: #c0c0c0;
+}
+
+.calendar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 @keyframes slide {
