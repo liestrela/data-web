@@ -249,21 +249,51 @@ input {
 }
 
 .calendar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.username-login-container,
-.password-login-container {
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .fail-text {
     color: var(--main-red);
+}
+
+.review-attachments {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.review-attachments textarea {
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.image-upload {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.image-preview img {
+  width: 150px;
+  height: auto;
 }
 
 @keyframes slide {

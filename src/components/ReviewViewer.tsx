@@ -6,11 +6,13 @@ import { ReviewCard } from "./ReviewCard";
 interface ReviewViewerProps {
   reviews: Review[];
   onRemove: (index: number) => void;
+  onUpdate: (index: number, updated: Review) => void;
 }
 
 export function ReviewViewer({
   reviews,
-  onRemove
+  onRemove,
+  onUpdate
 }: ReviewViewerProps) {
   const cardBottomRef = useRef<HTMLDivElement>(null);
 
@@ -39,6 +41,7 @@ export function ReviewViewer({
 		  	key={index}
 			review={review}
 			onRemove={() => onRemove(index)}
+            onUpdate={(updated) => onUpdate(index, updated)}
 		  />
         ))}
         <div ref={cardBottomRef} />

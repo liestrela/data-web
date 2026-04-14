@@ -21,74 +21,87 @@ export function Register() {
   }
 
   return (
-    <div className="login-page">
-      <label htmlFor="username-register">Usuário:</label>
-      <input 
-        id="username-register"
-        type="text"
-        value={userName}
-        className="subject-input"
-        style={{border : 'none'}}
-        onChange={(e) => setUserName(e.target.value)}
-        placeholder="Digite o nome de usuário"
-        />
-      {userExists && (
-        <p className="fail-text">Usuário já cadastrado</p>
-      )}
-      <label htmlFor="email-register">Email:</label>
-      <input 
-        id="email-register"
-        type="text"
-        value={email}
-        className="subject-input"
-        style={{border : 'none'}}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Digite seu email"
-        />
-      {emailExists && (
-        <p className="fail-text">Email já cadastrado</p>
-      )}
-      <label htmlFor="password-register">Senha:</label>
-      <input
-        id="password-register"
-        type="password"
-        value={password}
-        className="subject-input"
-        style={{border : 'none'}}
-        onChange={(e) =>{      
-          if (e.target.value === passwordRepeat)
-            setPasswordEqual(true);
-          else
-            setPasswordEqual(false);
+    <div className="app">
+      
+      <h1>Registrar</h1>
+      <div className="login-container">
+        <label htmlFor="username-register">Usuário:</label>
+        <input 
+          id="username-register"
+          type="text"
+          value={userName}
+          className="subject-input"
+          style={{border : 'none'}}
+          onChange={(e) => setUserName(e.target.value)}
+          placeholder="Digite o nome de usuário"
+          />
+        {userExists && (
+          <p className="fail-text">Usuário já cadastrado</p>
+        )}
+      </div>
 
-          setPasswordLenght(e.target.value.length);
-          setPassword(e.target.value);
+      <div className="login-container">
+        <label htmlFor="email-register">Email:</label>
+        <input 
+          id="email-register"
+          type="text"
+          value={email}
+          className="subject-input"
+          style={{border : 'none'}}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Digite seu email"
+          />
+        {emailExists && (
+          <p className="fail-text">Email já cadastrado</p>
+        )}
+      </div>
+
+      <div className="login-container">
+        <label htmlFor="password-register">Senha:</label>
+        <input
+          id="password-register"
+          type="password"
+          value={password}
+          className="subject-input"
+          style={{border : 'none'}}
+          onChange={(e) =>{      
+            if (e.target.value === passwordRepeat)
+              setPasswordEqual(true);
+            else
+              setPasswordEqual(false);
+
+            setPasswordLenght(e.target.value.length);
+            setPassword(e.target.value);
+            }}
+          placeholder="Digite a senha"
+        />
+        {password && passwordLength < 8 && (
+          <p className="fail-text">No mínimo 8 caracteres</p>
+        )}
+      </div>
+
+      <div className="login-container">
+        <label htmlFor="password-register-repeat">Repita sua senha:</label>
+        <input
+          id="password-register-repeat"
+          type="password"
+          value={passwordRepeat}
+          className="subject-input"
+          style={{border : 'none'}}
+          onChange={(e) => {
+            if (e.target.value === password)
+              setPasswordEqual(true);
+            else
+              setPasswordEqual(false);
+
+            setPasswordRepeat(e.target.value);
           }}
-        placeholder="Digite a senha"
-      />
-      {passwordLength < 8 && (
-        <p className="fail-text">No mínimo 8 caracteres</p>
-      )}
-      <label htmlFor="password-register-repeat">Repita sua senha:</label>
-      <input
-        id="password-register-repeat"
-        type="password"
-        value={passwordRepeat}
-        className="subject-input"
-        style={{border : 'none'}}
-        onChange={(e) => {
-          if (e.target.value === password)
-            setPasswordEqual(true);
-          else
-            setPasswordEqual(false);
-
-          setPasswordRepeat(e.target.value);
-        }}
-        placeholder="Digite sua senha novamente"
-      />
-      {(!passwordEqual && passwordRepeat.length > 0) && (
-        <p className="fail-text">Senhas diferentes</p>
-      )}
+          placeholder="Digite sua senha novamente"
+        />
+        {(!passwordEqual && passwordRepeat.length > 0) && (
+          <p className="fail-text">Senhas diferentes</p>
+        )}
+      </div>
       <button
         className="save-btn"
         onClick={registerUser}
@@ -97,7 +110,7 @@ export function Register() {
           passwordLength >= 8) 
           ? "#45718d" : "gray"}}
       >
-        Registar
+        Registrar
       </button>
     </div>
   )

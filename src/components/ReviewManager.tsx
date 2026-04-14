@@ -13,7 +13,17 @@ export function ReviewManager() {
   };
 
   const onRemoveReview = (index: number) => {
+    reviews[index].images?.forEach((url) => {
+      url.revokeObjectURL(url);
+    });
+
   	setReviews(reviews.filter((_, i) => i !== index));
+  };
+
+  const onUpdateReview = (index: number, updated: Review) => {
+    setReviews((prev) => {
+      return prev.map((review, i) => (i===index?updated:review));
+    });
   };
 
   return (
@@ -23,6 +33,7 @@ export function ReviewManager() {
       <ReviewViewer
 		reviews={reviews}
 		onRemove={onRemoveReview}
+        onUpdate={onUpdateReview}
 	  />
     </div>
   );

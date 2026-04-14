@@ -8,4 +8,6 @@ export interface ReviewPeriod {
 export interface Review {
   subject: string;
   periods: ReviewPeriod[];
+  notes?: string,
+  images?: string[];
 }
