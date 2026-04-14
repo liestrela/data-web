@@ -2,11 +2,11 @@ import { useState } from "react";
 import { ReviewSave } from "./ReviewSave";
 import { ReviewViewer } from "./ReviewViewer";
 import type { Review } from "../types";
-
 import { Calendar } from "./Calendar";
 
 export function ReviewManager() {
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [selectedDate, setSelectedDate] = useState<DateValue>(new Date());
 
   const onSaveReview = (newReview: Review) => {
     setReviews([...reviews, newReview]);
@@ -29,9 +29,28 @@ export function ReviewManager() {
   return (
     <div className="review-manager">
       <ReviewSave onSaveReview={onSaveReview} />
-	  <Calendar />
+	  <Calendar
+        date={selectedDate}
+        onChange={setSelectedDate}
+      />
+      
       <ReviewViewer
-		reviews={reviews}
+        reviews={
+          reviews.filter((r) => {
+            if (!(selectedDate instanceof Date)) return false;
+
+            const dayStart = new Date(selectedDate);
+            dayStart.setHours(0,0,0,0);
+
+            const dayEnd = new Date(selectedDate);
+            dayEnd.setHours(23,59,59,999);
+
+            return r.schedule.occurrences({
+              start: dayStart,
+              end: dayEnd
+            }).toArray().length > 0;
+          })
+        }
 		onRemove={onRemoveReview}
         onUpdate={onUpdateReview}
 	  />

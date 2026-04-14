@@ -1,18 +1,22 @@
 import { useState } from "react";
 import { Calendar as ReactCalendar } from "react-calendar";
+import type { DateValue } from "../types";
 
 import "../styles/calendar.css";
 
-type DateValuePiece = Date | null;
-type DateValue = DateValuePiece | [DateValuePiece, DateValuePiece];
+interface CalendarProps {
+	date: DateValue;
+	onChange: (date: DateValue) => void;
+}
 
-export function Calendar() {
-	const [date, setDate] = useState<DateValue>(new Date());
-
+export function Calendar({
+	date,
+	onChange
+}: CalendarProps) {
 	return (
 		<div className="calendar">
 			<ReactCalendar
-				onChange={setDate}
+				onChange={onChange}
 				locale="pt-BR"
 				value={date}
 			/>

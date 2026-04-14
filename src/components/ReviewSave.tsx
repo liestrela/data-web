@@ -1,9 +1,30 @@
 import { useState } from "react";
-import type { Review, ReviewPeriod } from "../types";
+import { addHours, addDays, addWeeks, addMonths } from "date-fns";
+import { Schedule } from "../rschedule"
+
+import type { TimeUnit, Review, ReviewPeriod } from "../types";
 import { ReviewPeriodInput } from "./ReviewPeriodInput";
 
 interface ReviewSaveProps {
   onSaveReview: (review: Review) => void;
+}
+
+const dateFromNow = (period: ReviewPeriod) => {
+  const now = new Date();
+
+  switch (period.unit) {
+    case "horas":
+      return addHours(now, period.many);
+
+    case "dias":
+      return addDays(now, period.many);
+
+    case "semanas":
+      return addWeeks(now, period.many);
+    
+    case "meses":
+      return addMonths(now, period.many);
+  }
 }
 
 export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
@@ -26,7 +47,17 @@ export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
 
   const handleSave = () => {
     if (!subject.trim() || periods.length === 0) return;
-    const newReview: Review = { subject, periods };
+
+    const schedule = new Schedule({
+      rdates: periods.map((period) => dateFromNow(period)),
+    });
+
+    const newReview: Review = {
+      subject,
+      periods,
+      schedule,
+    };
+
     onSaveReview(newReview);
 
     setSubject("");
