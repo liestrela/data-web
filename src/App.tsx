@@ -10,22 +10,17 @@ import "./styles/main.css";
 
 const router = createBrowserRouter([
 	{
-		element: <AuthGuard />,
-		children: [
-			{
-				path: "/",
-				element: <MainPage />,
-			},
-		],
-	},
-	{
-		path: "/login",
-		element: <Login />,
-	},
-	{
-		path: "/register",
-		element: <Register />,
-	},
+        path: "/",
+        element: <MainPage />,
+    },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/register",
+        element: <Register />,
+    },
 ]);
 
 export function App() {
