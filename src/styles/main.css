@@ -64,6 +64,8 @@ input {
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .review-manager {
@@ -175,16 +177,16 @@ input {
 .unit-input {
   background-color: var(--inp-bg-color);
   color: var(--main-fg-color);
-
   border: 0;
   padding: 0.6rem;
   border-radius: 15px;
 }
 
 .review-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
   padding: 1rem 0;
 }
 
@@ -192,22 +194,23 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
+  width: 100%;
   animation: smooth-appear 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .review-card {
-  background-color: var(--inp-bg-color);
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  padding: 1.25rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  background-color: #2d2d2d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .review-card-header {
@@ -215,7 +218,7 @@ input {
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 0.75rem;
 }
 
@@ -233,6 +236,7 @@ input {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  justify-content: center;
 }
 
 .period-badge {
@@ -263,44 +267,88 @@ input {
 }
 
 .fail-text {
-    color: var(--main-red);
+  color: var(--main-red);
 }
 
 .review-attachments {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
 }
 
-.review-attachments textarea {
+.notes-input {
   width: 100%;
-  border: 0;
-  border-radius: 5px;
-  padding: 5px;
+  background: var(--inp-bg-color);
+  color: var(--main-fg-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.notes-input:focus {
+  border-color: #457aaa;
 }
 
 .image-upload {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.image-upload span {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  font-weight: 500;
 }
 
 .image-preview {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.image-preview > div {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1a1a1a;
 }
 
 .image-preview img {
-  width: 150px;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+}
+
+.image-preview .remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+  background: rgba(231, 76, 60, 0.9);
+  border-radius: 4px;
+  z-index: 2;
+  cursor: pointer;
 }
 
 @keyframes slide {
   from {
     background-position: 0 0;
   }
-
   to {
     background-position: 256px 224px;
   }
@@ -328,6 +376,20 @@ input {
   }
 }
 
+@media (max-width: 480px) {
+  .image-preview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .app {
+    padding: 1rem;
+  }
+  
+  .review-card {
+    padding: 1rem;
+  }
+}
+
 @media (prefers-reduced-motion) {
   *,
   ::before,
@@ -335,4 +397,3 @@ input {
     animation: none !important;
   }
 }
-
