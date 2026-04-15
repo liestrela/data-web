@@ -85,9 +85,7 @@ export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
         </button>
       </form>
       <div className="review-periods-container">
-        <div className="review-header">
-          <span>Devo revisar isso</span>
-        </div>
+        <h2>Quando revisar?</h2>
         {periods.map((period, index) => (
           <ReviewPeriodInput
             key={index}

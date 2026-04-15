@@ -7,16 +7,19 @@ import "../styles/calendar.css";
 interface CalendarProps {
 	date: DateValue;
 	onChange: (date: DateValue) => void;
+	tileClassName: ({date, view}: {date: Date, view: string}) => string;
 }
 
 export function Calendar({
 	date,
-	onChange
+	onChange,
+	tileClassName
 }: CalendarProps) {
 	return (
 		<div className="calendar">
 			<ReactCalendar
 				onChange={onChange}
+				tileClassName={tileClassName}
 				locale="pt-BR"
 				value={date}
 			/>
