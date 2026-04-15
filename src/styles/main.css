@@ -10,6 +10,10 @@
   background-color: var(--main-bg-color);
 }
 
+#root {
+  width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -336,3 +340,21 @@ input {
   }
 }
 
+.nav_user {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  height: 50px;
+  gap: 30px;
+  padding-right: 50px;
+  background-color: #5e5d5d;
+  box-shadow: 0px 1px 5px white;
+}
+
+.nav_user a {
+  color: white;
+  font-size: 1.25em;
+}
