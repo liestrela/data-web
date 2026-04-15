@@ -66,42 +66,47 @@ export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
   };
 
   return (
-    <div className="review-form">
-      <form
-        className="subject-input"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSave();
-        }}
-      >
-        <input
-          type="text"
-          name="subject"
-          placeholder="O que eu estudei hoje?"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-        />
+    <div className="review-form-border">
+      <div className="review-form">
+        <h2 className="subject-input-title">
+          O que eu estudei hoje?
+        </h2>
+        <form
+          className="subject-input"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSave();
+          }}
+        >
+          <input
+            type="text"
+            name="subject"
+            placeholder="Descreva o que foi estudado"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+          />
+        </form>
+        <div className="review-periods-container">
+          <h2>Quando revisar?</h2>
+          {periods.map((period, index) => (
+            <ReviewPeriodInput
+              key={index}
+              period={period}
+              onChange={(updated) => handlePeriodChange(index, updated)}
+              onRemove={() => handleRemovePeriod(index)}
+              canRemove={periods.length > 1}
+            />
+          ))}
+          <button
+            type="button"
+            className="add-period-btn"
+            onClick={handleAddPeriod}
+          >
+            +
+          </button>
+        </div>
         <button type="button" className="save-btn" onClick={handleSave}>
           Salvar
-        </button>
-      </form>
-      <div className="review-periods-container">
-        <h2>Quando revisar?</h2>
-        {periods.map((period, index) => (
-          <ReviewPeriodInput
-            key={index}
-            period={period}
-            onChange={(updated) => handlePeriodChange(index, updated)}
-            onRemove={() => handleRemovePeriod(index)}
-            canRemove={periods.length > 1}
-          />
-        ))}
-        <button
-          type="button"
-          className="add-period-btn"
-          onClick={handleAddPeriod}
-        >
-          +
         </button>
       </div>
     </div>

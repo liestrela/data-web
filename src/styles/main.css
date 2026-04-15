@@ -81,11 +81,26 @@ input {
   max-width: 600px;
 }
 
-.review-form {
+.review-form-border {
+  background-image: url("../assets/wood.jpg");
+  background-size: cover;
+  padding: 4%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+}
+
+.review-form{
+  background-color: #056937;
+  width: 100%;
+  height: 100%;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  gap: 3vh;
+  font-family: "Indie Flower", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .review-periods-container {
@@ -132,7 +147,7 @@ input {
 
 .subject-input,
 .login-input {
-  width: 100%;
+  width: 90%;
   display: flex;
   background: var(--inp-bg-color);
   padding: 0.6rem;
@@ -144,6 +159,8 @@ input {
 }
 
 .subject-input input {
+  font-family: "Indie Flower", cursive;
+  font-size: 2.3vh;
   color: var(--main-fg-color);
   background: none;
   border: none;
@@ -154,7 +171,7 @@ input {
 }
 
 .save-btn {
-  background: #45718d;
+  background: #0b300a;
   color: var(--main-fg-color);
   border: 0;
   padding: 0.4rem 1.2rem;
@@ -182,6 +199,8 @@ input {
 
 .many-input,
 .unit-input {
+  font-family: "Indie Flower", cursive;
+  font-size: 2vh;
   flex: 1 1 auto;
   min-width: 0;
   max-width: 80px;
