@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { startOfWeek, endOfWeek} from "date-fns";
 import type { Review, DateValue } from "../types";
 
+import ReviewFilter from "./ReviewFilter";
 import ReviewSave from "./ReviewSave";
 import ReviewViewer from "./ReviewViewer";
 import ReviewBrief from "./ReviewBrief";
@@ -17,17 +18,17 @@ export function ReviewManager() {
     setReviews([...reviews, newReview]);
   };
 
-  const onRemoveReview = (index: number) => {
-    reviews[index]?.images?.forEach((url) => {
+  const onRemoveReview = (id: string) => {
+    reviews.find((r) => r.id==id)?.images?.forEach((url) => {
       URL.revokeObjectURL(url);
     });
 
-  	setReviews(reviews.filter((_, i) => i !== index));
+  	setReviews(reviews.filter((r) => r.id !== id));
   };
 
-  const onUpdateReview = (index: number, updated: Review) => {
+  const onUpdateReview = (id: string, updated: Review) => {
     setReviews((prev) => {
-      return prev.map((review, i) => (i===index?updated:review));
+      return prev.map((review) => (review.id===id?updated:review));
     });
   };
 
@@ -77,8 +78,6 @@ export function ReviewManager() {
         }).toArray().length > 0;
       });
       
-      console.log(hasReview);
-
       if (hasReview) {
         return "react-calendar-review";
       }
@@ -98,18 +97,9 @@ export function ReviewManager() {
         onSelectSubject={handleScroll}
       />
 
+      <div className="reviews">
       <h2>Revisões</h2>
-      <div className="filter-input-container">
-        <span>Mostrar:</span>
-        <select 
-          className="filter-input"
-          onChange={handleFilterChange}
-        >
-          <option value="false">todas</option>
-          <option value="true">por dia</option>
-        </select>
-      </div>
-
+      <ReviewFilter onChange={handleFilterChange} />
       {byDay &&
         <Calendar
           date={selectedDate}
@@ -117,6 +107,7 @@ export function ReviewManager() {
           tileClassName={getTileClassName}
         />
       }
+      </div>
      
       <ReviewViewer
         ref={viewerRef}

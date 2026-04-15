@@ -5,8 +5,8 @@ import { ReviewCard } from "./ReviewCard";
 
 interface ReviewViewerProps {
   reviews: Review[];
-  onRemove: (index: number) => void;
-  onUpdate: (index: number, updated: Review) => void;
+  onRemove: (id: string) => void;
+  onUpdate: (id: string, updated: Review) => void;
 }
 
 export const ReviewViewer = forwardRef((props: ReviewViewerProps, ref) => {
@@ -48,7 +48,7 @@ export const ReviewViewer = forwardRef((props: ReviewViewerProps, ref) => {
       <div className="review-list">
         {reviews.map((review, index) => (
           <div
-            key={index}
+            key={review.id}
             ref={(node) => {
               if (node) itemsRef.current.set(index, node);
               else itemsRef.current.delete(index);
@@ -56,8 +56,8 @@ export const ReviewViewer = forwardRef((props: ReviewViewerProps, ref) => {
             <ReviewCard 
               key={index}
               review={review}
-              onRemove={() => onRemove(index)}
-              onUpdate={(updated) => onUpdate(index, updated)}
+              onRemove={() => onRemove(review.id)}
+              onUpdate={(updated) => onUpdate(review.id, updated)}
             />
           </div>
         ))}

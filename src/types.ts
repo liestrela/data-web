@@ -11,6 +11,7 @@ export interface ReviewPeriod {
 }
 
 export interface Review {
+  id: string,
   subject: string;
   periods: ReviewPeriod[];
   schedule: Schedule;

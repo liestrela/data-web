@@ -30,7 +30,7 @@ export function Register() {
           id="username-register"
           type="text"
           value={userName}
-          className="subject-input"
+          className="login-input"
           style={{border : 'none'}}
           onChange={(e) => setUserName(e.target.value)}
           placeholder="Digite o nome de usuário"
@@ -44,9 +44,9 @@ export function Register() {
         <label htmlFor="email-register">Email:</label>
         <input 
           id="email-register"
-          type="text"
+          type="email"
           value={email}
-          className="subject-input"
+          className="login-input"
           style={{border : 'none'}}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Digite seu email"
@@ -62,7 +62,7 @@ export function Register() {
           id="password-register"
           type="password"
           value={password}
-          className="subject-input"
+          className="login-input"
           style={{border : 'none'}}
           onChange={(e) =>{      
             if (e.target.value === passwordRepeat)
@@ -86,7 +86,7 @@ export function Register() {
           id="password-register-repeat"
           type="password"
           value={passwordRepeat}
-          className="subject-input"
+          className="login-input"
           style={{border : 'none'}}
           onChange={(e) => {
             if (e.target.value === password)

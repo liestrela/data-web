@@ -53,6 +53,7 @@ export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
     });
 
     const newReview: Review = {
+      id: crypto.randomUUID(),
       subject,
       periods,
       schedule,

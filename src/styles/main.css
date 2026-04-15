@@ -47,7 +47,7 @@ h1 {
 }
 
 a {
-  color: #457aaa;
+  color: #5b93c7;
 }
 
 a:active {
@@ -130,7 +130,8 @@ input {
   background: #bd4539;
 }
 
-.subject-input {
+.subject-input,
+.login-input {
   width: 100%;
   display: flex;
   background: var(--inp-bg-color);
@@ -189,6 +190,12 @@ input {
   border: 0;
   padding: 0.6rem;
   border-radius: 15px;
+}
+
+.reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .review-list {

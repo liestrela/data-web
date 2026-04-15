@@ -1,21 +1,29 @@
-# data-web
+# Calendário de Revisões
 
-For development:
+Aplicação de página única (SPA) de um calendário de revisões feito com React.
+
+## Rodando
+
+Primeiro, instale o `bun`:
 
 ```bash
-bun dev
+npm -g bun
+```
+ou
+```bash
+curl -fsSL https://bun.com/install | bash
 ```
 
-To install dependencies:
+Instale as dependências:
 
 ```bash
 bun install
 ```
 
-To run:
+Para iniciar o servidor:
 
 ```bash
-bun run index.ts
+bun run src/main.ts
 ```
 
 This project was created using `bun init` in bun v1.3.11. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.

@@ -29,7 +29,7 @@ export function ReviewBrief({
 					Nenhuma revisão essa semana.
 				</div>
 			)}
-			<ul className="brief-subjects">
+			<div className="brief-subjects">
 				{reviews.map((review, index) => {
 					const occ = getWeekOccurrences(review);
 
@@ -39,6 +39,7 @@ export function ReviewBrief({
 						<div
 							className="brief-subject"
 							onClick={() => onSelectSubject(index)}
+							key={index}
 						>
 							<div className="brief-subject-title">
 								<span>{review.subject}</span>
@@ -59,7 +60,7 @@ export function ReviewBrief({
 						</div>
 					);
 				})}
-			</ul>
+			</div>
 		</div>
 	);
 }

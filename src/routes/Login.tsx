@@ -32,7 +32,7 @@ export function Login() {
           id="username-login"
           type="text"
           value={userName}
-          className="subject-input"
+          className="login-input"
           style={{border : 'none'}}
           onChange={(e) => setUserName(e.target.value)}
           placeholder="Digite o seu nome de usuário"
@@ -45,7 +45,7 @@ export function Login() {
           id="password-login"
           type="password"
           value={password}
-          className="subject-input"
+          className="login-input"
           style={{border : 'none'}}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Digite a sua senha"
