@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ReviewSave } from "./ReviewSave";
 import { ReviewViewer } from "./ReviewViewer";
-import type { Review } from "../types";
+import type { Review, DateValue } from "../types";
 import { Calendar } from "./Calendar";
 
 export function ReviewManager() {
@@ -13,8 +13,8 @@ export function ReviewManager() {
   };
 
   const onRemoveReview = (index: number) => {
-    reviews[index].images?.forEach((url) => {
-      url.revokeObjectURL(url);
+    reviews[index]?.images?.forEach((url) => {
+      URL.revokeObjectURL(url);
     });
 
   	setReviews(reviews.filter((_, i) => i !== index));
