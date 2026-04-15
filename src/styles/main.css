@@ -149,9 +149,9 @@ input {
 .login-input {
   width: 90%;
   display: flex;
-  background: var(--inp-bg-color);
+  background: transparent;
   padding: 0.6rem;
-  border-radius: 15px;
+  border-radius: 0;
   align-items: center;
   transition: 0.3s;
   gap: 0.5rem;
@@ -164,10 +164,16 @@ input {
   color: var(--main-fg-color);
   background: none;
   border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+  
   width: 100%;
   flex: 1;
   padding: 0.2rem;
   outline: none;
+}
+
+.subject-input input:focus {
+  border-bottom-color: #ffffff;
 }
 
 .save-btn {
