@@ -349,6 +349,67 @@ input {
   cursor: pointer;
 }
 
+.nav_user {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  height: 50px;
+  gap: 30px;
+  padding-right: 50px;
+  background-color: #5e5d5d;
+  box-shadow: 0px 1px 5px white;
+}
+
+.nav_user a {
+  color: var(--main-fg-color);
+  text-decoration: none;
+}
+
+.nav_user a:hover,
+.nav_user img:hover {
+  transform: translateY(-1.5px);
+}
+
+.nav_user img {
+  height: 50%;
+  object-fit: contain;
+  border-radius: 50%;
+  padding: 5px;
+  border: 1px solid var(--main-fg-color);
+}
+
+.user_drop {
+  position: absolute;
+  top: 100%; 
+  right: 0;
+  background-color: var(--main-bg-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 100; 
+  min-width: 150px;
+  box-shadow: 0px 2px 5px white;
+}
+
+.user_drop ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user_drop li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.user_drop li:hover {
+  color: #45718d;
+}
+
 @keyframes slide {
   from {
     background-position: 0 0;
@@ -392,61 +453,6 @@ input {
   .review-card {
     padding: 1rem;
   }
-}
-
-.nav_user {
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: end;
-  width: 100%;
-  height: 50px;
-  gap: 30px;
-  padding-right: 50px;
-  background-color: #5e5d5d;
-  box-shadow: 0px 1px 5px white;
-}
-
-.nav_user a {
-  color: white;
-  font-size: 1.25em;
-}
-
-.nav_user img {
-  height: 100%;
-  object-fit: contain;
-  border-radius: 50%;
-}
-
-.user_drop {
-  position: absolute;
-  top: 100%; 
-  right: 0;
-  background-color: var(--main-bg-color);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 10px;
-  z-index: 100; 
-  min-width: 150px;
-  box-shadow: 0px 2px 5px white;
-}
-
-.user_drop ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.user_drop li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.user_drop li:hover {
-  color: #45718d;
->>>>>>> origin/nav
 }
 
 @media (prefers-reduced-motion) {

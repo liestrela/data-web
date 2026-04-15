@@ -57,3 +57,5 @@ export function ReviewManager() {
     </div>
   );
 }
+
+export default ReviewManager;

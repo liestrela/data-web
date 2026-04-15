@@ -49,3 +49,5 @@ export function ReviewPeriodInput({
     </div>
   );
 }
+
+export default ReviewPeriodInput;

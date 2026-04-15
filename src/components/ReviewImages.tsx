@@ -111,3 +111,5 @@ export function ReviewImages({ images, subject, onUpdateImages }: ReviewImagesPr
     </div>
   );
 }
+
+export default ReviewImages;

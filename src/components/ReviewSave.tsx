@@ -108,3 +108,5 @@ export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
     </div>
   );
 }
+
+export default ReviewSave;

@@ -49,3 +49,5 @@ export function ReviewViewer({
     </div>
   );
 }
+
+export default ReviewViewer;
