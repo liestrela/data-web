@@ -5,9 +5,9 @@
     "": {
       "name": "data-web",
       "dependencies": {
-        "data-web": ".",
         "@rschedule/core": "^1.5.0",
         "@rschedule/standard-date-adapter": "^1.5.0",
+        "data-web": ".",
         "date-fns": "^4.1.0",
         "react": "^19.2.4",
         "react-calendar": "^6.0.1",
