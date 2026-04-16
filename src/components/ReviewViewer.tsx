@@ -38,7 +38,6 @@ export const ReviewViewer = forwardRef((props: ReviewViewerProps, ref) => {
   if (reviews.length === 0) {
     return (
       <div className="review-viewer empty">
-	  	Nenhuma revisão cadastrada.
 	  </div>
     );
   }

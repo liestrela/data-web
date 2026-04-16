@@ -95,8 +95,7 @@ export function ReviewManager() {
         onSelectSubject={handleScroll}
       />
 
-      <div className="reviews">
-		  <h2>Revisões</h2>
+	  <div className="reviews-container">
 		  <ReviewFilter onChange={handleFilterChange} />
 		  {byDay &&
 			<Calendar
@@ -105,16 +104,18 @@ export function ReviewManager() {
 			  tileClassName={getTileClassName}
 			/>
 		  }
-		 
-		  <ReviewViewer
-			ref={viewerRef}
-			reviews={
-			  byDay ? reviews.filter((r) => isReviewToday(r))
-			  : reviews
-			}
-			onRemove={onRemoveReview}
-			onUpdate={onUpdateReview}
-		  />
+			 
+		  <div className="reviews">
+			  <ReviewViewer
+				ref={viewerRef}
+				reviews={
+				  byDay ? reviews.filter((r) => isReviewToday(r))
+				  : reviews
+				}
+				onRemove={onRemoveReview}
+				onUpdate={onUpdateReview}
+			  />
+		  </div>
 	  </div>
     </div>
   );

@@ -8,6 +8,7 @@
   --main-black: black;
   --inp-bg-color: rgba(0, 0, 0, 0.2);
   --main-red: #e74c3c;
+  --main-yellow: #fef6ad;
 
   font-family: Inter, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
@@ -43,7 +44,6 @@ button:hover:not(:disabled) {
 }
 
 h1 {
-  margin: 0;
 }
 
 a {
@@ -77,8 +77,8 @@ input {
   display: flex;
   font-family: "Indie Flower", cursive;
   flex-direction: row;
-  gap: 15px;
   width: 100%;
+  gap: 15px;
 }
 
 .review-form-border {
@@ -188,10 +188,6 @@ input {
   background: #37586e;
 }
 
-.review-header {
-  font-size: 1.5em;
-}
-
 .review-period {
   display: flex;
   justify-content: center;
@@ -206,7 +202,6 @@ input {
 .many-input,
 .unit-input {
   font-family: "Indie Flower", cursive;
-  font-size: 2vh;
   flex: 1 1 auto;
   min-width: 0;
   max-width: 80px;
@@ -217,10 +212,16 @@ input {
   border-radius: 15px;
 }
 
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 50%;
+}
+
 .reviews {
   display: flex;
   flex-direction: column;
-  flex-basis: 50%;
+  flex-grow: 1;
   padding: 25px;
   color: var(--main-black);
   background-image: url("../assets/mural.jpg");
@@ -247,7 +248,7 @@ input {
 }
 
 .review-card {
-  background-color: #FEF6AD;
+  background-color: var(--main-yellow);
   color: var(--main-black);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0.6rem;
@@ -463,8 +464,6 @@ input {
 }
 
 .brief {
-  padding-top: 4%;
-  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
@@ -474,7 +473,6 @@ input {
   background-size: 100% 30px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  padding-bottom: 4%;
 }
 
 

@@ -25,7 +25,6 @@ export function ReviewBrief({
 
 	return (
     <div className="brief-container">
-      <h2>Resumo da semana</h2>
       <div className="spiral"></div>
 	  <div className="brief">
         {!hasReviewsThisWeek && (
