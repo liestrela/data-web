@@ -30,13 +30,18 @@ export function ReviewCard({
         <div className="review-card-header">
 		  <h3 className="review-subject">{review.subject}</h3>
         </div>
-        <ul className="period-list">
+
+		{
+		/*
+		<ul className="period-list">
           {review.periods.map((period, index) => (
             <li key={index} className="period-badge">
               Daqui a {period.many} {period.unit}
             </li>
           ))}
         </ul>
+		*/
+		}
 
         <div className="review-attachments">
           <textarea
@@ -46,11 +51,15 @@ export function ReviewCard({
             className="notes-input"
             rows={3}
           />
+		  {
+		  /*
           <ReviewImages
             images={review.images}
             subject={review.subject}
             onUpdateImages={(images) => onUpdate({ ...review, images })}
           />
+		  */
+		  }
         </div>
       </div>
 	</div>

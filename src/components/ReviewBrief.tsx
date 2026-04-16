@@ -24,10 +24,10 @@ export function ReviewBrief({
 	);
 
 	return (
-    <div className="brief-containter">
+    <div className="brief-container">
       <h2>Resumo da semana</h2>
-      <img src={gradeNotepad} alt="" />
-      <div className="brief">
+      <div className="spiral"></div>
+	  <div className="brief">
         {!hasReviewsThisWeek && (
           <div className="review-viewer empty">
             Nenhuma revisão essa semana.

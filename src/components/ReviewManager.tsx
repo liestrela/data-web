@@ -90,34 +90,32 @@ export function ReviewManager() {
     <div className="review-manager">
       <ReviewSave onSaveReview={onSaveReview} />
 	  
-      <hr/>
-      
       <ReviewBrief
         reviews={reviews}
         onSelectSubject={handleScroll}
       />
 
       <div className="reviews">
-      <h2>Revisões</h2>
-      <ReviewFilter onChange={handleFilterChange} />
-      {byDay &&
-        <Calendar
-          date={selectedDate}
-          onChange={setSelectedDate}
-          tileClassName={getTileClassName}
-        />
-      }
-      </div>
-     
-      <ReviewViewer
-        ref={viewerRef}
-        reviews={
-          byDay ? reviews.filter((r) => isReviewToday(r))
-          : reviews
-        }
-		onRemove={onRemoveReview}
-        onUpdate={onUpdateReview}
-	  />
+		  <h2>Revisões</h2>
+		  <ReviewFilter onChange={handleFilterChange} />
+		  {byDay &&
+			<Calendar
+			  date={selectedDate}
+			  onChange={setSelectedDate}
+			  tileClassName={getTileClassName}
+			/>
+		  }
+		 
+		  <ReviewViewer
+			ref={viewerRef}
+			reviews={
+			  byDay ? reviews.filter((r) => isReviewToday(r))
+			  : reviews
+			}
+			onRemove={onRemoveReview}
+			onUpdate={onUpdateReview}
+		  />
+	  </div>
     </div>
   );
 }

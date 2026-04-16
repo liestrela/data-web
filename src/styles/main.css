@@ -4,15 +4,15 @@
 }
 
 :root {
-  --main-fg-color: rgba(255, 255, 255, 0.94);
-  --main-bg-color: #3d3d3d;
+  --main-white: rgba(255, 255, 255, 0.94);
+  --main-black: black;
   --inp-bg-color: rgba(0, 0, 0, 0.2);
   --main-red: #e74c3c;
 
   font-family: Inter, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
-  color: var(--main-fg-color);
-  background-color: var(--main-bg-color);
+  color: var(--main-black);
+  background-image: url("../assets/back.jpg");
 }
 
 #root {
@@ -55,7 +55,7 @@ a:active {
 }
 
 input {
-  color: var(--main-fg-color);
+  color: var(--main-white);
 }
 
 .app {
@@ -75,16 +75,16 @@ input {
 
 .review-manager {
   display: flex;
-  flex-direction: column;
+  font-family: "Indie Flower", cursive;
+  flex-direction: row;
   gap: 15px;
   width: 100%;
-  max-width: 600px;
 }
 
 .review-form-border {
   background-image: url("../assets/wood.jpg");
   background-size: cover;
-  padding: 4%;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,13 +92,14 @@ input {
 
 .review-form{
   background-color: #056937;
+  color: var(--main-white);
+  border: 15px solid transparent;
+  border-image: url("../assets/wood.jpg") stretch 30;
   width: 100%;
   height: 100%;
-  padding-top: 4%;
-  padding-bottom: 4%;
-  gap: 3vh;
-  font-family: "Indie Flower", cursive;
+  padding: 25px;
   display: flex;
+  flex-basis: 20%;
   flex-direction: column;
   align-items: center;
 }
@@ -112,7 +113,7 @@ input {
 
 .add-period-btn {
   background: var(--inp-bg-color);
-  color: var(--main-fg-color);
+  color: var(--main-white);
   border: 0;
   border-radius: 5px;
   display: flex;
@@ -124,7 +125,7 @@ input {
 
 .remove-btn {
   background: var(--main-red);
-  color: var(--main-fg-color);
+  color: var(--main-white);
   font-weight: bold;
   border: 0;
   border-radius: 5px;
@@ -160,8 +161,7 @@ input {
 
 .subject-input input {
   font-family: "Indie Flower", cursive;
-  font-size: 2.3vh;
-  color: var(--main-fg-color);
+  color: var(--main-white);
   background: none;
   border: none;
   border-bottom: 2px solid rgba(255, 255, 255, 0.7);
@@ -178,7 +178,7 @@ input {
 
 .save-btn {
   background: #0b300a;
-  color: var(--main-fg-color);
+  color: var(--main-white);
   border: 0;
   padding: 0.4rem 1.2rem;
   border-radius: 8px;
@@ -211,7 +211,7 @@ input {
   min-width: 0;
   max-width: 80px;
   background-color: var(--inp-bg-color);
-  color: var(--main-fg-color);
+  color: var(--main-white);
   border: 0;
   padding: 0.6rem;
   border-radius: 15px;
@@ -220,15 +220,21 @@ input {
 .reviews {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  flex-basis: 50%;
+  padding: 25px;
+  color: var(--main-black);
+  background-image: url("../assets/mural.jpg");
+  background-repeat: repeat;
+  border: 15px solid transparent;
+  border-image: url("../assets/wood.jpg") stretch 30;
 }
 
 .review-list {
-  display: flex;
-  flex-direction: column;
   gap: 20px;
   width: 100%;
   padding: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .review-card-container {
@@ -241,16 +247,16 @@ input {
 }
 
 .review-card {
-  background-color: #2d2d2d;
+  background-color: #FEF6AD;
+  color: var(--main-black);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.2rem;
+  padding: 0.6rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  width: 100%;
+  width: 150px;
+  height: 150px;
   box-sizing: border-box;
 }
 
@@ -269,7 +275,6 @@ input {
   margin: 0;
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--main-fg-color);
 }
 
 .period-list {
@@ -284,15 +289,11 @@ input {
 
 .period-badge {
   background-color: var(--inp-bg-color);
-  color: var(--main-fg-color);
+  color: var(--main-white);
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 500;
-}
-
-.review-viewer.empty {
-  color: #c0c0c0;
 }
 
 .calendar {
@@ -322,10 +323,9 @@ input {
 
 .notes-input {
   width: 100%;
-  background: var(--inp-bg-color);
-  color: var(--main-fg-color);
+  background: var(--main-white);
+  color: var(--main-black);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
   padding: 12px;
   resize: vertical;
   font-family: inherit;
@@ -404,7 +404,7 @@ input {
 }
 
 .nav_user a {
-  color: var(--main-fg-color);
+  color: var(--main-white);
   text-decoration: none;
 }
 
@@ -418,14 +418,14 @@ input {
   object-fit: contain;
   border-radius: 50%;
   padding: 5px;
-  border: 1px solid var(--main-fg-color);
+  border: 1px solid var(--main-white);
 }
 
 .user_drop {
   position: absolute;
   top: 100%; 
   right: 0;
-  background-color: var(--main-bg-color);
+  background-color: var(--main-black);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 10px;
@@ -449,12 +449,13 @@ input {
   color: #45718d;
 }
 
-.brief-containter {
+.brief-container {
   display: flex;
   flex-direction: column;
+  flex-basis: 20%;
 }
 
-.brief-containter img {
+.brief-container img {
   display: block;
   width: 100%;
   height: 100%;
@@ -523,7 +524,7 @@ input {
   min-width: 0;
   max-width: 80px;
   background-color: var(--inp-bg-color);
-  color: var(--main-fg-color);
+  color: var(--main-white);
   border: 0;
   padding: 0.6rem;
   border-radius: 15px;
