@@ -1,5 +1,7 @@
 import { formatDistanceToNow, startOfWeek, endOfWeek } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import gradeNotepad from "../assets/thing.png"
+import { ReviewBriefSujectToReview } from "./ReviewBriefsubjectToReview";
 
 interface ReviewBriefProps {
 	reviews: Review[];
@@ -22,46 +24,29 @@ export function ReviewBrief({
 	);
 
 	return (
-		<div className="brief">
-			<h2>Resumo da semana</h2>
-			{!hasReviewsThisWeek && (
-				<div className="review-viewer empty">
-					Nenhuma revisão essa semana.
-				</div>
-			)}
-			<div className="brief-subjects">
-				{reviews.map((review, index) => {
-					const occ = getWeekOccurrences(review);
-
-					if (occ.length===0) return null;
-
-					return (
-						<div
-							className="brief-subject"
-							onClick={() => onSelectSubject(index)}
-							key={index}
-						>
-							<div className="brief-subject-title">
-								<span>{review.subject}</span>
-							</div>
-							<div className="brief-dates">
-								{occ.map((o, o_idx) => (
-									<div
-										className="brief-date"
-										key={o_idx}
-									>
-										{formatDistanceToNow(o.date, {
-											addSufix: true,
-											locale: ptBR
-										})}
-									</div>
-								))}
-							</div>
-						</div>
-					);
-				})}
-			</div>
-		</div>
+    <div className="brief-containter">
+      <h2>Resumo da semana</h2>
+      <img src={gradeNotepad} alt="" />
+      <div className="brief">
+        {!hasReviewsThisWeek && (
+          <div className="review-viewer empty">
+            Nenhuma revisão essa semana.
+          </div>
+        )}
+        <div className="brief-subjects">
+          {reviews.map((review, index) => {
+            const occ = getWeekOccurrences(review);
+            if (occ.length===0) return null;
+            return (
+              <ReviewBriefSujectToReview index={index} review={review} 
+                weekOcurrences={occ}  
+                onSelectSubject={onSelectSubject}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
 	);
 }
 
