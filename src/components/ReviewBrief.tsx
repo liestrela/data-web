@@ -26,7 +26,11 @@ export function ReviewBrief({
 	return (
     <div className="brief-container">
       <h2>Resumo da semana</h2>
-      <div className="spiral"></div>
+      <div className="spiral">
+        <div className="spiral-left"></div>
+        <div className="spiral-middle"></div>
+        <div className="spiral-right"></div>
+      </div>
 	  <div className="brief">
         {!hasReviewsThisWeek && (
           <div className="review-viewer empty">

@@ -684,3 +684,36 @@ input {
     animation: none !important;
   }
 }
+
+.spiral {
+  display: flex;
+  height: 2.5rem;
+  width: 100%;
+}
+
+.spiral-left,
+.spiral-right {
+  height: 100%;
+  flex: 0 0 auto;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.spiral-left {
+  aspect-ratio: 56 / 191;
+  background-image: url("../assets/spiralleft.png");
+}
+
+.spiral-right {
+  aspect-ratio: 66 / 191;
+  background-image: url("../assets/spiralright.png");
+}
+
+.spiral-middle {
+  flex: 1;
+  background-image: url("../assets/middle.png");
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+}
