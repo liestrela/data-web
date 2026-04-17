@@ -50,10 +50,11 @@ button:hover:not(:disabled) {
 	justify-content: flex-end;
 	gap: 30px;
 	align-items: center;
-	background: linear-gradient(0deg, rgba(0, 0, 0, 0.407) 0%, rgba(255, 255, 255, 0.407) 100%);
+	backdrop-filter: blur(0.8px);
+	box-shadow: inset 0 0 14px rgba(0,0,0,0.5);
 	height: 50px;
 	padding: 0 15px;
-	border-bottom: 1px solid #1a1a1a;
+	border-bottom: 1px solid #6f6f6f;
 }
 
 .nav_user a {
@@ -70,15 +71,15 @@ button:hover:not(:disabled) {
 
 .user_drop {
 	position: absolute;
-	top: 50px; 
+	top: 55px; 
 	right: 0;
-	background-color: #ffffffb7;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(0.8px);
 	border-radius: 8px;
-	padding: 10px;
+	padding: 0 10px;
 	z-index: 100; 
 	min-width: 150px;
-	box-shadow: 0px 2px 5px white;
+	color: black;
+	box-shadow: -6px 6px 15px rgba(0, 0, 0, 0.6);
 }
 
 .user_drop ul {
@@ -93,7 +94,7 @@ button:hover:not(:disabled) {
 }
 
 .user_drop li:hover {
-	color: #45718d;
+	color: rgb(84, 84, 84);
 }
 
 .app {
@@ -118,26 +119,39 @@ button:hover:not(:disabled) {
 	align-items: center;
 }
 
+.filter-input-container select {
+	box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
 .review-manager {
 	display: flex;
 	gap: 10px;
 	height: 100%;
 }
 
+.review-form input, 
+.review-form select {
+	box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.review-form button {
+	box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+}
+
 .review-form-border {
 	background-image: url("../assets/wood.jpg");
 	background-size: cover;
 	padding: 15px;
-	box-shadow: -6px -6px 12px rgba(0, 0, 0, 0.2);
 	width: 100%;
 	flex-basis: 25%;
+	box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.5);
 }
 
 .reviews-container-border {
 	background-image: url("../assets/wood.jpg");
 	background-size: cover;
 	padding: 15px;
-	box-shadow: -6px -6px 12px rgba(0, 0, 0, 0.2);
+	box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.5);
 	width: 100%;
 	flex-basis: 55%;
 }
@@ -156,6 +170,7 @@ button:hover:not(:disabled) {
 	text-align: center;
 	gap: 5px;
 	overflow-y: auto;
+	box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
 }
 
 .review-periods-container {
@@ -239,10 +254,15 @@ button:hover:not(:disabled) {
 	border-radius: 8px;
 }
 
+.expanded-content .save-btn {
+	background: rgba(0, 0, 0, 0.6);
+	box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
 .brief {
 	background: #eae9e1;
 	flex-basis: 20%;
-	box-shadow: -6px -6px 12px rgba(0, 0, 0, 0.2);
+	box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.5);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -274,6 +294,7 @@ button:hover:not(:disabled) {
 	align-items: center;
 	flex: 0 1 50%;
 	overflow-y: auto;
+	box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
 }
 
 .review-viewer {
@@ -303,15 +324,14 @@ button:hover:not(:disabled) {
 	position: relative;
 	background-color: var(--main-yellow);
 	color: var(--main-black);
-	border: 1px solid rgba(255, 255, 255, 0.1);
 	padding: 0.6rem;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 150px;
 	height: 150px;
 	box-sizing: border-box;
+	box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.6);
 }
 
 .card-overlay {
@@ -334,7 +354,7 @@ button:hover:not(:disabled) {
 	width: 90%;
 	max-width: 500px;
 	height: auto;
-	animation: none; /* Remove animação de entrada para não conflitar */
+	animation: none;
 }
 
 .review-card-container.expanded .review-card {
@@ -353,9 +373,10 @@ button:hover:not(:disabled) {
 	margin-top: 15px;
 }
 
-.review-card:not(.expanded) {
+.review-card .expanded {
 	cursor: pointer;
 	transition: transform 0.2s;
+	box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
 }
 
 .review-card:not(.expanded):hover {
@@ -373,6 +394,7 @@ button:hover:not(:disabled) {
 	font-size: 0.95rem;
 	box-sizing: border-box;
 	outline: none;
+	box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .notes-input:focus {

@@ -1,3 +1,7 @@
+.login-container input, .login-btn {
+    box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
 .app {
     display: flex;
     flex-direction: column;
@@ -35,7 +39,8 @@
 }
 
 .login-input {
-    background-color: var(--inp-bg-color);
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0.5px);
     padding: 0.8rem;
     border-radius: 8px;
     color: var(--main-black);
@@ -63,4 +68,13 @@
     font-weight: bold;
     font-size: 0.9rem;
     margin: 5px 0;
+}
+
+
+.login-btn {
+	background: rgba(0, 0, 0, 0.1);
+	color: var(--main-black);
+	border: 0;
+	padding: 0.4rem 1.2rem;
+	border-radius: 8px;
 }

@@ -54,7 +54,7 @@ export function Login() {
       </div>
       <a href="">Esqueceu a senha?</a>
       <button
-        className="save-btn"
+        className="login-btn"
         onClick={handleLogin}
       >
         Logar

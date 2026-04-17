@@ -54,7 +54,10 @@ export function ReviewCard({ review, onRemove, onUpdate }: ReviewCardProps) {
 					</button>
 				)}
 				
-				<div className="review-card" onClick={!isExpanded ? toggleExpand : undefined}>
+				<div 
+					className={`review-card ${isExpanded ? "expanded" : ""}`}
+					onClick={!isExpanded ? toggleExpand : undefined}
+				>
 					<div className="review-card-header">
 						<h3 className="review-subject">
 							{cutString(review.subject, 20)}
