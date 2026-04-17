@@ -1,0 +1,66 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.app h1 {
+    margin-bottom: 10px;
+    color: var(--main-black);
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    gap: 5px;
+}
+
+.login-input {
+    background-color: var(--inp-bg-color);
+    padding: 0.8rem;
+    border-radius: 8px;
+    color: var(--main-black);
+    font-family: inherit;
+}
+
+.login-input:focus {
+    outline: 2px solid var(--main-black);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.app a {
+    color: var(--main-black);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.app a:hover {
+    text-decoration: underline;
+}
+
+.fail-text {
+    color: var(--main-red);
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}

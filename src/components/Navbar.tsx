@@ -8,32 +8,32 @@ export function Navbar() {
 	const { user, logout } = useAuth();
 	const [userDropdown, setUserDropdown] = useState(false);
 
-	return (
-		<div>
-			{!user ? (
-				<nav className="nav_user">
-					<Link to="/login">Login</Link>
-					<Link to="/register">Registrar</Link>
-				</nav>
-			) : (
-				<nav className="nav_user">
-					<img
-						src={defaultUserImage}
-						alt="Imagem do usuário"
-						onClick={() => setUserDropdown(!userDropdown)}
-					/>
+	if (user) {
+		return (
+			<nav className="nav_user">
+				<img
+					src={defaultUserImage}
+					alt="Imagem do usuário"
+					onClick={() => setUserDropdown(!userDropdown)}
+				/>
 
-					{userDropdown && (
-						<div className="user_drop">
-							<ul>
-								<li onClick={logout}>Logout</li>
-							</ul>
-						</div>
-					)}
-				</nav>
-			)}
-		</div>
-	);
+				{userDropdown && (
+					<div className="user_drop">
+						<ul>
+							<li onClick={logout}>Logout</li>
+						</ul>
+					</div>
+				)}
+			</nav>
+		);
+	} else {
+		return (
+			<nav className="nav_user">
+				<Link to="/login">Login</Link>
+				<Link to="/register">Registrar</Link>
+			</nav>
+		);
+	}
 }
 
 export default Navbar;

@@ -10,36 +10,36 @@ import Register from "./routes/Register";
 import "./styles/main.css";
 
 const router = createBrowserRouter([
-    {
-        element: <RootLayout />,
-        children: [
-            {
-                element: <AuthGuard />,
-                children: [
-                    {
-                        path: "/",
-                        element: <MainPage />,
-                    }
-                ],
-            },
-            {
-                path: "/login",
-                element: <Login />,
-            },
-            {
-                path: "/register",
-                element: <Register />,
-            },
-        ]
-    }
+	{
+		element: <RootLayout />,
+		children: [
+			{
+				element: <AuthGuard />,
+				children: [
+					{
+						path: "/",
+						element: <MainPage />,
+					}
+				],
+			},
+			{
+				path: "/login",
+				element: <Login />,
+			},
+			{
+				path: "/register",
+				element: <Register />,
+			},
+		]
+	}
 ]);
 
 export function App() {
-  return (
-	  <AuthProvider>
-          <RouterProvider router={router} />
-	  </AuthProvider>
-  );
+	return (
+		<AuthProvider>
+			<RouterProvider router={router} />
+		</AuthProvider>
+	);
 }
 
 export default App;

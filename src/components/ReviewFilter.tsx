@@ -9,7 +9,7 @@ export function ReviewFilter({
 }: ReviewFilterProps) {
 	return (
 		<div className="filter-input-container">
-       		<span>Mostrar:</span>
+	   		<span>Mostrar:</span>
 			<select 
 		 		className="filter-input"
 		 		onChange={onChange}

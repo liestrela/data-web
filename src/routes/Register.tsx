@@ -22,7 +22,6 @@ export function Register() {
 
   return (
     <div className="app">
-      
       <h1>Registrar</h1>
       <div className="login-container">
         <label htmlFor="username-register">Usuário:</label>

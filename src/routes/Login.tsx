@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 import "../styles/main.css";
+import "../styles/login-register.css";
 
 export function Login() {
   const [userName, setUserName] = useState("");
@@ -61,12 +62,9 @@ export function Login() {
       {loginFail && (
         <p className="fail-text">Usuário ou senha incorretos</p>
       )}
-      <a 
-        href=""
-        onClick={() => navigate("/register")}
-      >
+      <Link to="/register">
         Não tem uma conta?<br/>Clique aqui para registrar.
-      </a>
+      </Link>
     </div>
   );
 }
