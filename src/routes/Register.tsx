@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "../styles/main.css";
+import "../styles/login-register.css";
 
 export function Register() {
   const [userName, setUserName] = useState("");
@@ -102,12 +103,8 @@ export function Register() {
         )}
       </div>
       <button
-        className="save-btn"
+        className="login-btn"
         onClick={registerUser}
-        style={{backgroundColor : (passwordEqual && 
-          userName.length > 1 && email.length > 1 &&
-          passwordLength >= 8) 
-          ? "#45718d" : "gray"}}
       >
         Registrar
       </button>
