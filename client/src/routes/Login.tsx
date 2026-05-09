@@ -15,9 +15,8 @@ export function Login() {
   const { login: authLogin } = useAuth();
 
   const handleLogin = async() => {
-    if (userName === "usuario" && password === "senha") {
+    if (await authLogin(userName, password)) {
       setLoginFail(false);
-      authLogin("token");
       navigate("/");
     } else {
       setLoginFail(true);
