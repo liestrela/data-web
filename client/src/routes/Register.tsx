@@ -18,7 +18,7 @@ export function Register() {
 
   const navigate = useNavigate();
 
-  const { login: authLogin } = useAuth();
+  const { updateAuthToken } = useAuth();
 
   const registerUser = async () => {
     if (passwordRepeat !== password) {
@@ -26,13 +26,8 @@ export function Register() {
       return;
     }
 
-    if (email === "") {
-      return;
-    }
-
-    if (userName === "") {
-      return;
-    }
+    if (email === "") return;
+    if (userName === "") return;
 
     const url = "http://localhost:3001/api/auth/register";
     try {
@@ -42,19 +37,23 @@ export function Register() {
         body: JSON.stringify({ name: userName, email: email, password : password})
       })
 
-      if (!response.ok) {
-        throw new Error(`Response register status: ${response.status}`)
-      }
-
       const result = await response.json();
 
-      if (result.message === "ok") {
-        await authLogin(userName, password);
-        navigate("/");
-      } else if (result.message === "name") {
-        setUserExists(true);
-      } else if (result.message === "email") {
-        setEmailExists(true);
+      switch (response.status) {
+        case 201:
+          updateAuthToken(result.token);
+          navigate("/");
+          break;
+        case 409:
+          if (result.message === "user") {
+            console.log("Got here")
+            setUserExists(true);
+          } else if (result.message === "email") {
+            setEmailExists(true);
+          }
+          break;
+        default:
+          throw new Error(`Response register status: ${response.status}`) 
       }
     } catch (error) {
       if (error instanceof Error) {

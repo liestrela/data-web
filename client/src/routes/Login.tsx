@@ -8,18 +8,25 @@ import "../styles/login-register.css";
 export function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [loginFail, setLoginFail] = useState(false)
+  const [userExists, setUserExists] = useState(false);
+  const [wrongPassword, setWrongPassword] = useState(false);
 
   const navigate = useNavigate();
 
   const { login: authLogin } = useAuth();
 
   const handleLogin = async() => {
-    if (await authLogin(userName, password)) {
-      setLoginFail(false);
-      navigate("/");
-    } else {
-      setLoginFail(true);
+    const result = await authLogin(userName, password);
+    switch (result) {
+      case "ok":
+        navigate("/");
+        break;
+      case "user":
+        setUserExists(true);
+        break;
+      case "password":
+        setWrongPassword(true);
+        break;
     }
   };
 
@@ -34,9 +41,15 @@ export function Login() {
           value={userName}
           className="login-input"
           style={{border : 'none'}}
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={(e) => {
+            setUserName(e.target.value);
+            setUserExists(false);
+          }}
           placeholder="Digite o seu nome de usuário"
           />
+        {userExists && (
+          <p className="fail-text">Usuário não existente</p>
+        )}
       </div>
 
       <div className="login-container">
@@ -47,9 +60,15 @@ export function Login() {
           value={password}
           className="login-input"
           style={{border : 'none'}}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setWrongPassword(false);
+          }}
           placeholder="Digite a sua senha"
         />
+        {wrongPassword && (
+          <p className="fail-text">Senha incorreta</p>
+        )}
       </div>
       <a href="">Esqueceu a senha?</a>
       <button
@@ -58,9 +77,6 @@ export function Login() {
       >
         Logar
       </button>
-      {loginFail && (
-        <p className="fail-text">Usuário ou senha incorretos</p>
-      )}
       <Link to="/register">
         Não tem uma conta?<br/>Clique aqui para registrar.
       </Link>

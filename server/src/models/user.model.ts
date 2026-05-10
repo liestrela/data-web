@@ -1,8 +1,7 @@
 import { drizzle } from "drizzle-orm/node-postgres"
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { users, type User } from "@/db/schema";
 import { genSalt, hash } from "bcrypt";
-import { DatabaseError } from "pg";
 
 export { createUser, findUserById, findUserByName}
 
@@ -12,23 +11,29 @@ async function createUser(name: string, email: string, password: string) : Promi
   const salt = await genSalt();
   const hashpass = await hash(password, salt);
 
-  try {
-    await db.insert(users).values({
-      name: name,
-      email: email,
-      password: hashpass
-    });
+  // Verificar se o email ou usuário existem no banco
+  const [res_name] = await db
+    .select({ exists: sql<boolean>`1` })
+    .from(users)
+    .where(eq(users.name, name))
+    .limit(1)
+  
+  if (!!res_name) return "user";
 
-  } catch (error) {
-    if (error instanceof DatabaseError) {
-      if (error.detail!.includes("email")) {
-        return "email";
-      }
-      if (error.detail!.includes("name")) {
-        return "name";
-      }
-    }
-  }
+  const [res_email] = await db
+    .select({ exists: sql<boolean>`1` })
+    .from(users)
+    .where(eq(users.email, email))
+    .limit(1)
+
+  if (!!res_email) return "email";
+
+  await db.insert(users).values({
+    name: name,
+    email: email,
+    password: hashpass
+  });
+
   return "ok";
 }
 
