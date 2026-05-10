@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/main.css";
 import "../styles/login-register.css";
@@ -14,10 +16,50 @@ export function Register() {
   const [userExists, setUserExists] = useState(false);
   const [passwordEqual, setPasswordEqual] = useState(false);
 
-  const registerUser = () => {
+  const navigate = useNavigate();
+
+  const { login: authLogin } = useAuth();
+
+  const registerUser = async () => {
     if (passwordRepeat !== password) {
       setPasswordEqual(false);
       return;
+    }
+
+    if (email === "") {
+      return;
+    }
+
+    if (userName === "") {
+      return;
+    }
+
+    const url = "http://localhost:3001/api/auth/register";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: userName, email: email, password : password})
+      })
+
+      if (!response.ok) {
+        throw new Error(`Response register status: ${response.status}`)
+      }
+
+      const result = await response.json();
+
+      if (result.message === "ok") {
+        await authLogin(userName, password);
+        navigate("/");
+      } else if (result.message === "name") {
+        setUserExists(true);
+      } else if (result.message === "email") {
+        setEmailExists(true);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      }
     }
   }
 
@@ -32,7 +74,10 @@ export function Register() {
           value={userName}
           className="login-input"
           style={{border : 'none'}}
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={(e) => {
+            setUserName(e.target.value);
+            setUserExists(false);
+          }}
           placeholder="Digite o nome de usuário"
           />
         {userExists && (
@@ -48,7 +93,10 @@ export function Register() {
           value={email}
           className="login-input"
           style={{border : 'none'}}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setEmailExists(false);
+          }}
           placeholder="Digite seu email"
           />
         {emailExists && (

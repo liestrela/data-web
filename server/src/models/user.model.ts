@@ -1,26 +1,45 @@
-export type { User }
+import { drizzle } from "drizzle-orm/node-postgres"
+import { eq } from "drizzle-orm";
+import { users, type User } from "@/db/schema";
+import { genSalt, hash } from "bcrypt";
+import { DatabaseError } from "pg";
 
 export { createUser, findUserById, findUserByName}
 
-interface User {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
+const db = drizzle(process.env.DATABASE_URL!)
+
+async function createUser(name: string, email: string, password: string) : Promise<string> {
+  const salt = await genSalt();
+  const hashpass = await hash(password, salt);
+
+  try {
+    await db.insert(users).values({
+      name: name,
+      email: email,
+      password: hashpass
+    });
+
+  } catch (error) {
+    if (error instanceof DatabaseError) {
+      if (error.detail!.includes("email")) {
+        return "email";
+      }
+      if (error.detail!.includes("name")) {
+        return "name";
+      }
+    }
+  }
+  return "ok";
 }
 
-const users: User[] = [
-    {id: 0, name: "Goro", email: "i@g", password: "3"}
-]
-
-function createUser(name: string, email: string, password: string) {
-    users.push({id: users.length + 1, name, email, password});
+async function findUserById(id : number) : Promise<User[]> {
+  return await db.select()
+    .from(users)
+    .where(eq(users.id, id)); 
 }
 
-function findUserById(id : number) : User | undefined {
-    return users[id];
-}
-
-function findUserByName(name: string) {
-    return users.find(u => u.name === name);
+async function findUserByName(name: string) : Promise<User[]> {
+  return await db.select()
+    .from(users)
+    .where(eq(users.name, name));
 }
