@@ -5,10 +5,10 @@ import { useAuth } from "../context/AuthContext";
 import defaultUserImage from "../assets/default.svg";
 
 export function Navbar() {
-	const { user, logout } = useAuth();
+	const { authToken, logout } = useAuth();
 	const [userDropdown, setUserDropdown] = useState(false);
 
-	if (user) {
+	if (authToken) {
 		return (
 			<nav className="nav_user">
 				<img

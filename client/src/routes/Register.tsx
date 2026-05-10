@@ -46,7 +46,6 @@ export function Register() {
           break;
         case 409:
           if (result.message === "user") {
-            console.log("Got here")
             setUserExists(true);
           } else if (result.message === "email") {
             setEmailExists(true);
