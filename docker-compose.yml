@@ -5,6 +5,11 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: teste
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d teste"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     ports:
       - "5432:5432"
     volumes:
@@ -12,16 +17,17 @@ services:
     
   server:
     build: ./server
-    command: bun dev
     ports:
       - "3001:3001"
     environment:
       DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/teste
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - ./server:/app
       - /app/node_modules
+    command: ["/bin/sh", "-c", "bunx drizzle-kit push && bun dev"]
 
   client:
     build: ./client
