@@ -17,4 +17,5 @@ export interface Review {
   schedule: Schedule;
   notes?: string,
   images?: string[];
+  color?: string;
 }

@@ -43,7 +43,10 @@ export function ReviewBrief({
 						const occ = getWeekOccurrences(review);
 						if (occ.length===0) return null;
 						return (
-							<ReviewBriefSubjectToReview index={index} review={review} 
+							<ReviewBriefSubjectToReview
+								key={review.id ?? index}
+								index={index}
+								review={review} 
 								weekOcurrences={occ}  
 								onSelectSubject={onSelectSubject}
 							/>

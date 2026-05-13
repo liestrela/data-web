@@ -9,12 +9,26 @@ interface ReviewCardProps {
 	onUpdate: (updated: Review) => void;
 }
 
+const COLOR_OPTIONS: { label: string; value: string; bg: string }[] = [
+	{ label: "Amarelo", value: "yellow",  bg: "#fef6ad" },
+	{ label: "Vermelho", value: "red",    bg: "#f7a8a0" },
+	{ label: "Laranja",  value: "orange", bg: "#ffd59e" },
+	{ label: "Verde",    value: "green",  bg: "#b8f0b0" },
+];
+
 export function ReviewCard({ review, onRemove, onUpdate }: ReviewCardProps) {
 	const [isExpanded, setIsExpanded] = useState(false);
+
+	const currentColor =
+    COLOR_OPTIONS.find((c) => c.value === review.color) ?? COLOR_OPTIONS[0];
 
 	const handleNoteChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		e.stopPropagation();
 		onUpdate({ ...review, notes: e.target.value });
+	};
+
+	const handleColorChange = (value: string) => {
+		onUpdate({ ...review, color: value });
 	};
 
 	const toggleExpand = () => setIsExpanded(!isExpanded);
@@ -56,6 +70,7 @@ export function ReviewCard({ review, onRemove, onUpdate }: ReviewCardProps) {
 				
 				<div 
 					className={`review-card ${isExpanded ? "expanded" : ""}`}
+					style={{ backgroundColor: currentColor.bg }}
 					onClick={!isExpanded ? toggleExpand : undefined}
 				>
 					<div className="review-card-header">
@@ -71,6 +86,17 @@ export function ReviewCard({ review, onRemove, onUpdate }: ReviewCardProps) {
 
 					{isExpanded && (
 						<div className="expanded-content">
+							<div className="color-picker" onClick={(e) => e.stopPropagation()}>
+								{COLOR_OPTIONS.map((c) => (
+								  <button
+									key={c.value}
+									className={`color-dot ${review.color === c.value || (!review.color && c.value === "yellow") ? "active" : ""}`}
+									style={{ backgroundColor: c.bg }}
+									title={c.label}
+									onClick={() => handleColorChange(c.value)}
+								  />
+								))}
+							</div>
 							{/* Seção de Períodos reativada */}
 							<ul className="period-list">
 								{review.periods.map((period, index) => (
