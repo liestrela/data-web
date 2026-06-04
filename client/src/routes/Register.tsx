@@ -34,8 +34,12 @@ export function Register() {
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: userName, email: email, password : password})
-      })
+        body: JSON.stringify({
+          name: userName,
+          email: email,
+          password: password,
+        }),
+      });
 
       const result = await response.json();
 
@@ -52,54 +56,50 @@ export function Register() {
           }
           break;
         default:
-          throw new Error(`Response register status: ${response.status}`) 
+          throw new Error(`Response register status: ${response.status}`);
       }
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
       }
     }
-  }
+  };
 
   return (
     <div className="app">
       <h1>Registrar</h1>
       <div className="login-container">
         <label htmlFor="username-register">Usuário:</label>
-        <input 
+        <input
           id="username-register"
           type="text"
           value={userName}
           className="login-input"
-          style={{border : 'none'}}
+          style={{ border: "none" }}
           onChange={(e) => {
             setUserName(e.target.value);
             setUserExists(false);
           }}
           placeholder="Digite o nome de usuário"
-          />
-        {userExists && (
-          <p className="fail-text">Usuário já cadastrado</p>
-        )}
+        />
+        {userExists && <p className="fail-text">Usuário já cadastrado</p>}
       </div>
 
       <div className="login-container">
         <label htmlFor="email-register">Email:</label>
-        <input 
+        <input
           id="email-register"
           type="email"
           value={email}
           className="login-input"
-          style={{border : 'none'}}
+          style={{ border: "none" }}
           onChange={(e) => {
             setEmail(e.target.value);
             setEmailExists(false);
           }}
           placeholder="Digite seu email"
-          />
-        {emailExists && (
-          <p className="fail-text">Email já cadastrado</p>
-        )}
+        />
+        {emailExists && <p className="fail-text">Email já cadastrado</p>}
       </div>
 
       <div className="login-container">
@@ -109,16 +109,14 @@ export function Register() {
           type="password"
           value={password}
           className="login-input"
-          style={{border : 'none'}}
-          onChange={(e) =>{      
-            if (e.target.value === passwordRepeat)
-              setPasswordEqual(true);
-            else
-              setPasswordEqual(false);
+          style={{ border: "none" }}
+          onChange={(e) => {
+            if (e.target.value === passwordRepeat) setPasswordEqual(true);
+            else setPasswordEqual(false);
 
             setPasswordLenght(e.target.value.length);
             setPassword(e.target.value);
-            }}
+          }}
           placeholder="Digite a senha"
         />
         {password && passwordLength < 8 && (
@@ -133,29 +131,24 @@ export function Register() {
           type="password"
           value={passwordRepeat}
           className="login-input"
-          style={{border : 'none'}}
+          style={{ border: "none" }}
           onChange={(e) => {
-            if (e.target.value === password)
-              setPasswordEqual(true);
-            else
-              setPasswordEqual(false);
+            if (e.target.value === password) setPasswordEqual(true);
+            else setPasswordEqual(false);
 
             setPasswordRepeat(e.target.value);
           }}
           placeholder="Digite sua senha novamente"
         />
-        {(!passwordEqual && passwordRepeat.length > 0) && (
+        {!passwordEqual && passwordRepeat.length > 0 && (
           <p className="fail-text">Senhas diferentes</p>
         )}
       </div>
-      <button
-        className="login-btn"
-        onClick={registerUser}
-      >
+      <button className="login-btn" onClick={registerUser}>
         Registrar
       </button>
     </div>
-  )
+  );
 }
 
 export default Register;

@@ -11,11 +11,11 @@ export interface ReviewPeriod {
 }
 
 export interface Review {
-  id: string,
+  id: number | string;
   subject: string;
+  color?: string;
   periods: ReviewPeriod[];
   schedule: Schedule;
-  notes?: string,
+  notes?: string;
   images?: string[];
-  color?: string;
 }

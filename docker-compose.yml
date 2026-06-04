@@ -4,9 +4,9 @@ services:
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: teste
+      POSTGRES_DB: ${DB_NAME}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d teste"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -14,13 +14,32 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-    
+
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+
   server:
     build: ./server
     ports:
       - "3001:3001"
     environment:
-      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/teste
+      DATABASE_URL_DRIZZLE: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      JWT_SECRET: ${JWT_SECRET}
+      MINIO_ENDPOINT: "minio"
+      MINIO_PORT: "9000"
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET: "cards-images"
     depends_on:
       db:
         condition: service_healthy
@@ -40,3 +59,4 @@ services:
 
 volumes:
   db_data:
+  minio_data:

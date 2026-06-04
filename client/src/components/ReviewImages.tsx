@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent, type DragEvent } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import { useAuth } from "../context/AuthContext";
 
 interface ReviewImagesProps {
   images?: string[];
@@ -8,14 +9,40 @@ interface ReviewImagesProps {
   onUpdateImages: (images: string[]) => void;
 }
 
-export function ReviewImages({ images, subject, onUpdateImages }: ReviewImagesProps) {
+export function ReviewImages({
+  images,
+  subject,
+  onUpdateImages,
+}: ReviewImagesProps) {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const { authToken } = useAuth();
 
-  const processFiles = (files: FileList) => {
-    const newImgURLs = Array.from(files).map((f) => URL.createObjectURL(f));
-    onUpdateImages([...(images || []), ...newImgURLs]);
+  const processFiles = async (files: FileList) => {
+    const formData = new FormData();
+    Array.from(files).forEach((file) => {
+      formData.append("files", file);
+    });
+
+    try {
+      const response = await fetch("http://localhost:3001/api/upload/store", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        onUpdateImages([...(images || []), ...data.urls]);
+      } else {
+        console.error("Erro ao fazer upload das imagens");
+      }
+    } catch (error) {
+      console.error("Erro na requisição de upload", error);
+    }
   };
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,11 +70,23 @@ export function ReviewImages({ images, subject, onUpdateImages }: ReviewImagesPr
     }
   };
 
-  const removeImage = (idx: number) => {
+  const removeImage = async (idx: number) => {
     if (!images) return;
 
-    if (images[idx]) {
-      URL.revokeObjectURL(images[idx]);
+    const imageUrl = images[idx];
+    if (imageUrl) {
+      try {
+        await fetch("http://localhost:3001/api/upload/delete", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+          body: JSON.stringify({ imageUrl }),
+        });
+      } catch (error) {
+        console.error("Erro ao deletar a imagem", error);
+      }
     }
 
     const fImgs = images.filter((_, i) => i !== idx);
@@ -75,7 +114,11 @@ export function ReviewImages({ images, subject, onUpdateImages }: ReviewImagesPr
           marginBottom: "16px",
         }}
       >
-        <span>{isDragging ? "Solte as imagens aqui..." : "Clique ou arraste imagens aqui"}</span>
+        <span>
+          {isDragging
+            ? "Solte as imagens aqui..."
+            : "Clique ou arraste imagens aqui"}
+        </span>
         <input
           type="file"
           accept="image/*"

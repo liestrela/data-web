@@ -4,26 +4,22 @@ Aplicação de página única (SPA) de um calendário de revisões feito com Rea
 
 ## Rodando
 
-Primeiro, instale o `bun`:
+Primeiro, garanta que possui o Docker Compose instalado. Crie um arquivo .env baseado no .env.example.
 
 ```bash
-npm -g bun
-```
-ou
-```bash
-curl -fsSL https://bun.com/install | bash
+cp .env.example .env
+nano .env
 ```
 
-Instale as dependências:
+E então inicie o docker:
 
 ```bash
-bun install
+docker compose up
 ```
 
-Para iniciar o servidor:
+O docker iniciará com quatro containers:
 
-```bash
-bun run src/main.ts
-```
-
-This project was created using `bun init` in bun v1.3.11. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+- Banco de dados postgresql
+- Servidor minio para imagens
+- Servidor bun de backend com express
+- Servidor bun de frontend bun com reactjs

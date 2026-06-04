@@ -1,4 +1,4 @@
-import { Schedule } from "./rschedule";
+import { Schedule } from "./util/rschedule";
 
 export type TimeUnit = "horas" | "dias" | "semanas" | "meses";
 
@@ -11,11 +11,11 @@ export interface ReviewPeriod {
 }
 
 export interface Review {
-  id: string,
+  id: string;
   subject: string;
   periods: ReviewPeriod[];
   schedule: Schedule;
-  notes?: string,
+  notes?: string;
   images?: string[];
   color?: string;
 }

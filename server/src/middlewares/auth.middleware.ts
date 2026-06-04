@@ -1,26 +1,47 @@
-import type { Request, Response, NextFunction } from "express"
+import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-export { authToken }
+export { authToken };
 
-export interface AuthRequest extends Request {
-  user?: string | jwt.JwtPayload;
+export interface TokenPayload {
+  sub: number;
+  email: string;
+  iat: number;
+  exp: number;
 }
 
-const secret = process.env.JWT_TOKEN!;
+export interface AuthRequest extends Request {
+  user?: TokenPayload;
+}
 
-async function authToken(req : AuthRequest, res : Response, next : NextFunction) {
+const secret = process.env.JWT_SECRET!;
+
+async function authToken(req: AuthRequest, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
-  const token = authHeader?.split(' ')[1];
+  const token = authHeader?.split(" ")[1];
 
   if (!token) {
-    return res.sendStatus(401);
+    return res.sendStatus(401).json({ error: "Token não fornecido" });
   } else {
     jwt.verify(token, secret, (err, decoded) => {
-        if (err) return res.sendStatus(401);
+      if (err) return res.sendStatus(401);
 
-        req.user = decoded;
-        next();
-    })
+      if (!decoded || typeof decoded === "string") {
+        return res.sendStatus(401).json({ error: "Token inválido" });
+      }
+
+      // garante que está no formato de resposta de /login
+      if (!("sub" in decoded) || !("email" in decoded)) {
+        return res.sendStatus(401).json({ error: "Token inválido" }); 
+      }
+
+      req.user = {
+        sub: Number(decoded.sub),
+        email: decoded.email as string,
+        iat: decoded.iat ?? 0,
+        exp: decoded.exp ?? 0,
+      };
+      next();
+    });
   }
 }

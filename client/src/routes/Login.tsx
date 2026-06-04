@@ -15,7 +15,7 @@ export function Login() {
 
   const { login: authLogin } = useAuth();
 
-  const handleLogin = async() => {
+  const handleLogin = async () => {
     const result = await authLogin(userName, password);
     switch (result) {
       case "ok":
@@ -35,21 +35,19 @@ export function Login() {
       <h1>Login</h1>
       <div className="login-container">
         <label htmlFor="username-login">Usuário:</label>
-        <input 
+        <input
           id="username-login"
           type="text"
           value={userName}
           className="login-input"
-          style={{border : 'none'}}
+          style={{ border: "none" }}
           onChange={(e) => {
             setUserName(e.target.value);
             setUserExists(false);
           }}
           placeholder="Digite o seu nome de usuário"
-          />
-        {userExists && (
-          <p className="fail-text">Usuário não existente</p>
-        )}
+        />
+        {userExists && <p className="fail-text">Usuário não existente</p>}
       </div>
 
       <div className="login-container">
@@ -59,26 +57,23 @@ export function Login() {
           type="password"
           value={password}
           className="login-input"
-          style={{border : 'none'}}
+          style={{ border: "none" }}
           onChange={(e) => {
             setPassword(e.target.value);
             setWrongPassword(false);
           }}
           placeholder="Digite a sua senha"
         />
-        {wrongPassword && (
-          <p className="fail-text">Senha incorreta</p>
-        )}
+        {wrongPassword && <p className="fail-text">Senha incorreta</p>}
       </div>
       <a href="">Esqueceu a senha?</a>
-      <button
-        className="login-btn"
-        onClick={handleLogin}
-      >
+      <button className="login-btn" onClick={handleLogin}>
         Logar
       </button>
       <Link to="/register">
-        Não tem uma conta?<br/>Clique aqui para registrar.
+        Não tem uma conta?
+        <br />
+        Clique aqui para registrar.
       </Link>
     </div>
   );
