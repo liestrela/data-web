@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from "react";
+import { useState, useEffect, useRef, type ChangeEvent } from "react";
 import type { Review } from "../types";
 import { ReviewImages } from "./ReviewImages";
 import { startOfWeek, endOfWeek } from "date-fns";
@@ -7,6 +7,7 @@ interface ReviewCardProps {
   review: Review;
   onRemove: () => void;
   onUpdate: (updated: Review) => void;
+  onClickCheck?: () => boolean;
 }
 
 const COLOR_OPTIONS: { label: string; value: string; bg: string }[] = [
@@ -16,8 +17,28 @@ const COLOR_OPTIONS: { label: string; value: string; bg: string }[] = [
   { label: "Verde", value: "green", bg: "#b8f0b0" },
 ];
 
-export function ReviewCard({ review, onRemove, onUpdate }: ReviewCardProps) {
+const CLOSE_DURATION = 280;
+
+export function ReviewCard({ review, onRemove, onUpdate, onClickCheck }: ReviewCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const closingTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => () => clearTimeout(closingTimer.current), []);
+
+  useEffect(() => {
+    if (!isExpanded || isClosing) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setIsClosing(true);
+      closingTimer.current = setTimeout(() => {
+        setIsExpanded(false);
+        setIsClosing(false);
+      }, CLOSE_DURATION);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isExpanded, isClosing]);
 
   const currentColor =
     COLOR_OPTIONS.find((c) => c.value === review.color) ?? COLOR_OPTIONS[0]!;
@@ -31,7 +52,19 @@ export function ReviewCard({ review, onRemove, onUpdate }: ReviewCardProps) {
     onUpdate({ ...review, color: value });
   };
 
-  const toggleExpand = () => setIsExpanded(!isExpanded);
+  const toggleExpand = () => {
+    if (!isExpanded) {
+      if (onClickCheck && !onClickCheck()) return;
+      setIsExpanded(true);
+    } else {
+      if (isClosing) return;
+      setIsClosing(true);
+      closingTimer.current = setTimeout(() => {
+        setIsExpanded(false);
+        setIsClosing(false);
+      }, CLOSE_DURATION);
+    }
+  };
 
   const now = new Date();
 
@@ -53,9 +86,14 @@ export function ReviewCard({ review, onRemove, onUpdate }: ReviewCardProps) {
 
   return (
     <>
-      {isExpanded && <div className="card-overlay" onClick={toggleExpand} />}
+      {isExpanded && (
+        <div
+          className={`card-overlay${isClosing ? " closing" : ""}`}
+          onClick={isClosing ? undefined : toggleExpand}
+        />
+      )}
 
-      <div className={`review-card-container ${isExpanded ? "expanded" : ""}`}>
+      <div className={`review-card-container${isExpanded ? " expanded" : ""}${isClosing ? " closing" : ""}`}>
         {!isExpanded && (
           <button
             className="remove-btn"
@@ -73,6 +111,15 @@ export function ReviewCard({ review, onRemove, onUpdate }: ReviewCardProps) {
           style={{ backgroundColor: currentColor.bg }}
           onClick={!isExpanded ? toggleExpand : undefined}
         >
+          {isExpanded && (
+            <button
+              className="card-close-btn"
+              onClick={(e) => { e.stopPropagation(); toggleExpand(); }}
+              title="Fechar (Esc)"
+            >
+              ✕
+            </button>
+          )}
           <div className="review-card-header">
             <h3 className="review-subject">{cutString(review.subject, 20)}</h3>
           </div>
