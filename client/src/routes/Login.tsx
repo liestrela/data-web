@@ -33,43 +33,45 @@ export function Login() {
   return (
     <div className="app">
       <h1>Login</h1>
-      <div className="login-container">
-        <label htmlFor="username-login">Usuário:</label>
-        <input
-          id="username-login"
-          type="text"
-          value={userName}
-          className="login-input"
-          style={{ border: "none" }}
-          onChange={(e) => {
-            setUserName(e.target.value);
-            setUserExists(false);
-          }}
-          placeholder="Digite o seu nome de usuário"
-        />
-        {userExists && <p className="fail-text">Usuário não existente</p>}
-      </div>
+      <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
+        <div className="login-container">
+          <label htmlFor="username-login">Usuário:</label>
+          <input
+            id="username-login"
+            type="text"
+            value={userName}
+            className="login-input"
+            style={{ border: "none" }}
+            onChange={(e) => {
+              setUserName(e.target.value);
+              setUserExists(false);
+            }}
+            placeholder="Digite o seu nome de usuário"
+          />
+          {userExists && <p className="fail-text">Usuário não existente</p>}
+        </div>
 
-      <div className="login-container">
-        <label htmlFor="password-login">Senha:</label>
-        <input
-          id="password-login"
-          type="password"
-          value={password}
-          className="login-input"
-          style={{ border: "none" }}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            setWrongPassword(false);
-          }}
-          placeholder="Digite a sua senha"
-        />
-        {wrongPassword && <p className="fail-text">Senha incorreta</p>}
-      </div>
-      <a href="">Esqueceu a senha?</a>
-      <button className="login-btn" onClick={handleLogin}>
-        Logar
-      </button>
+        <div className="login-container">
+          <label htmlFor="password-login">Senha:</label>
+          <input
+            id="password-login"
+            type="password"
+            value={password}
+            className="login-input"
+            style={{ border: "none" }}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setWrongPassword(false);
+            }}
+            placeholder="Digite a sua senha"
+          />
+          {wrongPassword && <p className="fail-text">Senha incorreta</p>}
+        </div>
+        <a href="">Esqueceu a senha?</a>
+        <button type="submit" className="login-btn">
+          Logar
+        </button>
+      </form>
       <Link to="/register">
         Não tem uma conta?
         <br />
