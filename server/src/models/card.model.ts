@@ -12,7 +12,7 @@ async function createCard(
   periods?: ReviewPeriod[],
   schedule?: string,
   notes?: string,
-  images?: string[]
+  attachments?: string[]
 ): Promise<Card | undefined> {
   const [created] = await db
     .insert(cards)
@@ -23,7 +23,7 @@ async function createCard(
       periods,
       schedule,
       notes,
-      images
+      attachments
     })
     .returning();
 

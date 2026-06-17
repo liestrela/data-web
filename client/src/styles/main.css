@@ -349,12 +349,10 @@ body.dragging * {
   0% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.42);
-    box-shadow: -4px 4px 16px rgba(0, 0, 0, 0.25);
   }
   100% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    box-shadow: -14px 14px 55px rgba(0, 0, 0, 0.65);
   }
 }
 
@@ -362,12 +360,10 @@ body.dragging * {
   0% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    box-shadow: -14px 14px 55px rgba(0, 0, 0, 0.65);
   }
   100% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.42);
-    box-shadow: -4px 4px 16px rgba(0, 0, 0, 0.25);
   }
 }
 
@@ -406,6 +402,7 @@ body.dragging * {
   width: 90%;
   max-width: 500px;
   height: auto;
+  will-change: transform, opacity;
   animation: card-expand 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
@@ -559,6 +556,96 @@ body.dragging * {
   border-radius: 4px;
   z-index: 2;
   cursor: pointer;
+}
+
+.image-preview > .pdf-item {
+  background: #eae9e1;
+  background-image: linear-gradient(#94d1e240 1px, transparent 1px);
+  background-size: 100% 35px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: -3px 3px 8px rgba(0, 0, 0, 0.45),
+              inset 0 0 6px rgba(0, 0, 0, 0.06);
+}
+
+.image-preview .pdf-thumb {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 8px;
+  transition: opacity 0.15s ease;
+}
+
+.image-preview .pdf-thumb:hover {
+  opacity: 0.8;
+}
+
+.image-preview .pdf-thumb span {
+  font-size: 0.6rem;
+  font-family: "Indie Flower", cursive;
+  color: #3a3a3a;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  padding: 0 4px;
+}
+
+.pdf-lightbox-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.pdf-lightbox-card {
+  background: #eae9e1;
+  background-image: linear-gradient(#94d1e240 1px, transparent 1px);
+  background-size: 100% 35px;
+  border-radius: 4px;
+  padding: 36px 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 300px;
+  width: 85%;
+  box-shadow: -6px 6px 24px rgba(0, 0, 0, 0.65),
+              inset 0 0 10px rgba(0, 0, 0, 0.08);
+  font-family: "Indie Flower", cursive;
+  color: #1a1a1a;
+}
+
+.pdf-lightbox-title {
+  font-size: 1.05rem;
+  color: #2c2c2c;
+  text-align: center;
+  word-break: break-word;
+  max-width: 240px;
+  line-height: 1.4;
+}
+
+.pdf-lightbox-download {
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--main-white);
+  border: 0;
+  padding: 0.4rem 1.4rem;
+  border-radius: 8px;
+  font-family: "Indie Flower", cursive;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: -3px 3px 8px rgba(0, 0, 0, 0.35);
+  transition: transform 0.12s ease;
+}
+
+.pdf-lightbox-download:hover {
+  transform: translateY(-1.5px);
 }
 
 .expanded .notes-input {

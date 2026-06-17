@@ -16,6 +16,6 @@ export interface Review {
   periods: ReviewPeriod[];
   schedule: Schedule;
   notes?: string;
-  images?: string[];
+  attachments?: string[];
   color?: string;
 }

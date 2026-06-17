@@ -23,20 +23,20 @@ async function create(req: AuthRequest, res: Response) {
   }
 
   if (
-    data.images !== undefined && 
-    (!Array.isArray(data.images) || !data.images.every((img: any) => typeof img === "string"))
+    data.attachments !== undefined &&
+    (!Array.isArray(data.attachments) || !data.attachments.every((f: any) => typeof f === "string"))
   ) {
     return res.status(400).json({ error: "Dados inválidos" });
   }
 
   const created = await createCard(
-    user.sub, 
-    data.subject, 
-    data.color, 
-    data.periods, 
-    data.schedule, 
+    user.sub,
+    data.subject,
+    data.color,
+    data.periods,
+    data.schedule,
     data.notes,
-    data.images
+    data.attachments
   );
 
   return res.status(201).json(created);
@@ -75,12 +75,12 @@ async function update(req: AuthRequest, res: Response) {
   if (typeof data.notes === "string") updates.notes = data.notes;
 
   if (
-    Array.isArray(data.images) && 
-    data.images.every((img: any) => typeof img === "string")
+    Array.isArray(data.attachments) &&
+    data.attachments.every((f: any) => typeof f === "string")
   ) {
-    updates.images = data.images;
-  } else if (data.images !== undefined) {
-    return res.status(400).json({ error: "Imagens inválidas" });
+    updates.attachments = data.attachments;
+  } else if (data.attachments !== undefined) {
+    return res.status(400).json({ error: "Anexos inválidos" });
   }
 
   const updated = await updateCard(data.id, updates);

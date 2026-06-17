@@ -20,7 +20,7 @@ const cards = pgTable("cards", {
   periods: jsonb().$type<ReviewPeriod[]>(),
   schedule: jsonb(),
   notes: text(),
-  images: text().array().default([]),
+  attachments: text().array().default([]),
 });
 
 export { users, cards };

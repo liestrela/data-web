@@ -166,9 +166,9 @@ export function ReviewCard({ review, onRemove, onUpdate, onClickCheck }: ReviewC
 
                 <div onClick={(e) => e.stopPropagation()}>
                   <ReviewImages
-                    images={review.images}
+                    attachments={review.attachments}
                     subject={review.subject}
-                    onUpdateImages={(images) => onUpdate({ ...review, images })}
+                    onUpdateAttachments={(attachments) => onUpdate({ ...review, attachments })}
                   />
                 </div>
               </div>

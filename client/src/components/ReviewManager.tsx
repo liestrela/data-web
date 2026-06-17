@@ -71,7 +71,7 @@ export function ReviewManager() {
           periods: newReview.periods,
           schedule: newReview.schedule,
           notes: newReview.notes,
-          images: newReview.images,
+          attachments: newReview.attachments,
         }),
       });
 
@@ -97,8 +97,8 @@ export function ReviewManager() {
 
       if (response.ok) {
         const reviewToRemove = reviews.find((r) => r.id == id);
-        if (reviewToRemove?.images) {
-          for (const url of reviewToRemove.images) {
+        if (reviewToRemove?.attachments) {
+          for (const url of reviewToRemove.attachments) {
             try {
               await fetch("http://localhost:3001/api/upload/delete", {
                 method: "POST",
@@ -136,7 +136,7 @@ export function ReviewManager() {
           periods: updated.periods,
           schedule: updated.schedule,
           notes: updated.notes,
-          images: updated.images,
+          attachments: updated.attachments,
         }),
       });
 
