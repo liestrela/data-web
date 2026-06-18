@@ -77,6 +77,7 @@ export function Register() {
             value={userName}
             className="login-input"
             style={{ border: "none" }}
+            autoComplete="off"
             onChange={(e) => {
               setUserName(e.target.value);
               setUserExists(false);
@@ -94,6 +95,7 @@ export function Register() {
             value={email}
             className="login-input"
             style={{ border: "none" }}
+            autoComplete="off"
             onChange={(e) => {
               setEmail(e.target.value);
               setEmailExists(false);
@@ -111,6 +113,7 @@ export function Register() {
             value={password}
             className="login-input"
             style={{ border: "none" }}
+            autoComplete="off"
             onChange={(e) => {
               if (e.target.value === passwordRepeat) setPasswordEqual(true);
               else setPasswordEqual(false);
@@ -133,6 +136,7 @@ export function Register() {
             value={passwordRepeat}
             className="login-input"
             style={{ border: "none" }}
+            autoComplete="off"
             onChange={(e) => {
               if (e.target.value === password) setPasswordEqual(true);
               else setPasswordEqual(false);

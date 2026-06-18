@@ -21,6 +21,7 @@ export function ReviewPeriodInput({
         min="1"
         type="number"
         name="many"
+        autoComplete="off"
         value={period.many}
         onChange={(e) => onChange({ ...period, many: Number(e.target.value) })}
       />

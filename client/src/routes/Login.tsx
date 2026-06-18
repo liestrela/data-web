@@ -42,6 +42,7 @@ export function Login() {
             value={userName}
             className="login-input"
             style={{ border: "none" }}
+            autoComplete="off"
             onChange={(e) => {
               setUserName(e.target.value);
               setUserExists(false);
@@ -59,6 +60,7 @@ export function Login() {
             value={password}
             className="login-input"
             style={{ border: "none" }}
+            autoComplete="off"
             onChange={(e) => {
               setPassword(e.target.value);
               setWrongPassword(false);

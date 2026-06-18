@@ -82,6 +82,7 @@ export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
             type="text"
             name="subject"
             placeholder="Descreva o que foi estudado"
+            autoComplete="off"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
           />
