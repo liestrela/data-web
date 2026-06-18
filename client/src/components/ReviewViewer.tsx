@@ -50,9 +50,6 @@ export const ReviewViewer = forwardRef((props: ReviewViewerProps, ref) => {
       reviews.forEach((r, i) => {
         if (!next.has(r.id)) next.set(r.id, calcGridPos(i));
       });
-      for (const id of next.keys()) {
-        if (!reviews.find((r) => r.id === id)) next.delete(id);
-      }
       return next;
     });
   }, [reviews, calcGridPos]);

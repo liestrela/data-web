@@ -790,8 +790,20 @@ body.dragging * {
   background-size: auto 100%;
 }
 
+@keyframes calendar-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .calendar {
   margin-top: 15px;
+  animation: calendar-slide-in 0.26s ease-out forwards;
 }
 
 @media (max-width: 930px) {
