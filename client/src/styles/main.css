@@ -3,6 +3,13 @@
   padding: 0;
 }
 
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
 html,
 body,
 #root {
@@ -29,6 +36,11 @@ button:hover:not(:disabled) {
   cursor: pointer;
 }
 
+button:active:not(:disabled) {
+  transform: translateY(1px);
+  transition-duration: 0.07s;
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -38,13 +50,15 @@ button:hover:not(:disabled) {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--main-red);
-  color: var(--main-white);
+  background: linear-gradient(180deg, #ef6b5e 0%, #c0392b 45%, #a93226 46%, #c33c30 100%);
+  color: white;
   font-weight: bold;
-  border: 0;
+  border: 1px solid #8e1f16;
   border-radius: 5px;
   height: 25px;
   width: 25px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .nav_user {
@@ -52,36 +66,56 @@ button:hover:not(:disabled) {
   justify-content: flex-end;
   gap: 30px;
   align-items: center;
-  backdrop-filter: blur(0.8px);
-  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.5);
   height: 50px;
   padding: 0 15px;
-  border-bottom: 1px solid #6f6f6f;
+  opacity: 80%;
+  background: linear-gradient(180deg, #555 0%, #1e1e1e 45%, #0e0e0e 46%, #282828 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.75);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .nav_user a {
-  color: var(--main-black);
+  color: #f0f0f0;
   text-decoration: none;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.01em;
 }
 
 .nav_user img {
-  border: 1px solid white;
+  border: 2px solid rgba(255, 255, 255, 0.7);
   border-radius: 50%;
-  padding: 3px;
+  padding: 2px;
   height: 60%;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease;
+}
+
+.nav_user img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.nav_user img:active {
+  transform: translateY(1px) scale(0.91);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.3);
+  transition-duration: 0.07s;
 }
 
 .user_drop {
   position: absolute;
   top: 55px;
   right: 0;
-  backdrop-filter: blur(0.8px);
+  background: linear-gradient(180deg, #f7f7f7 0%, #e2e2e2 100%);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   padding: 0 10px;
   z-index: 100;
   min-width: 150px;
-  color: black;
-  box-shadow: -6px 6px 15px rgba(0, 0, 0, 0.6);
+  color: #111;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .user_drop ul {
@@ -93,14 +127,16 @@ button:hover:not(:disabled) {
 .user_drop li {
   padding: 8px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .user_drop li:hover {
-  color: rgb(84, 84, 84);
+  color: white;
+  background: linear-gradient(180deg, #5b9dd9 0%, #2c6ab5 100%);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
 }
 
 .app {
-  font-family: "Indie Flower", cursive;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -133,14 +169,21 @@ button:hover:not(:disabled) {
 
 .review-form input,
 .review-form select {
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(180deg, #b4d0da 0%, #d4e8ef 100%);
+  color: #1a3040;
+  border: 1px solid #7aacbc;
+  border-top-color: #527888;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.18), inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .review-form button {
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .review-form-border {
+  font-family: "Indie Flower", cursive;
   background-image: url("../assets/wood.jpg");
   background-size: cover;
   padding: 15px;
@@ -150,6 +193,7 @@ button:hover:not(:disabled) {
 }
 
 .reviews-container-border {
+  font-family: "Indie Flower", cursive;
   background-image: url("../assets/wood.jpg");
   background-size: cover;
   padding: 15px;
@@ -214,22 +258,16 @@ body.dragging * {
   flex: 1 1 auto;
   min-width: 50px;
   max-width: 200px;
-  background-color: var(--inp-bg-color);
-  color: var(--main-white);
-  border: 0;
   padding: 0.6rem;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 
 .review-period input,
 .subject-input input {
   max-width: 50px;
   min-width: 0;
-  background-color: var(--inp-bg-color);
-  color: var(--main-white);
-  border: 0;
   padding: 0.6rem;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 
 .subject-input-title {
@@ -246,28 +284,38 @@ body.dragging * {
 }
 
 .add-period-btn {
-  background: var(--inp-bg-color);
+  background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.07) 45%, rgba(0,0,0,0.06) 46%, rgba(0,0,0,0.12) 100%);
   color: var(--main-white);
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom-color: rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 25px;
   height: 25px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .save-btn {
-  background: var(--inp-bg-color);
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.06) 45%, rgba(0,0,0,0.05) 46%, rgba(0,0,0,0.14) 100%);
   color: var(--main-white);
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom-color: rgba(0, 0, 0, 0.3);
   padding: 0.4rem 1.2rem;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .expanded-content .save-btn {
-  background: rgba(0, 0, 0, 0.6);
-  box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, #555 0%, #1e1e1e 45%, #0e0e0e 46%, #282828 100%);
+  color: white;
+  border: 1px solid #080808;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
 }
 
 .brief {
@@ -345,6 +393,21 @@ body.dragging * {
   box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.6);
 }
 
+@keyframes card-remove {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg) translateY(0);
+  }
+  22% {
+    transform: scale(1.08) rotate(-6deg) translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.06) rotate(24deg) translateY(-8px);
+    filter: blur(1px);
+  }
+}
+
 @keyframes card-expand {
   0% {
     opacity: 0;
@@ -391,6 +454,11 @@ body.dragging * {
 
 .card-overlay.closing {
   animation: overlay-out 0.28s ease forwards;
+  pointer-events: none;
+}
+
+.review-card-container.removing {
+  animation: card-remove 0.38s cubic-bezier(0.4, 0, 0.8, 0.2) forwards;
   pointer-events: none;
 }
 
@@ -492,20 +560,22 @@ body.dragging * {
 
 .notes-input {
   width: 100%;
-  background: var(--main-white);
-  color: var(--main-black);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, #e4e4e4 0%, #fafafa 100%);
+  color: #1a1a1a;
+  border: 1px solid #b0b0b0;
+  border-top-color: #888;
   padding: 12px;
   resize: vertical;
   font-family: inherit;
   font-size: 0.95rem;
   box-sizing: border-box;
   outline: none;
-  box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.14), inset 0 1px 2px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .notes-input:focus {
-  border-color: #457aaa;
+  border-color: #7aacbc;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.12), 0 0 4px rgba(122, 172, 188, 0.4), 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .image-upload {
@@ -683,6 +753,7 @@ body.dragging * {
 }
 
 .brief-container {
+  font-family: "Indie Flower", cursive;
   display: flex;
   flex-direction: column;
 }

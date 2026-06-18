@@ -18,13 +18,19 @@ const COLOR_OPTIONS: { label: string; value: string; bg: string }[] = [
 ];
 
 const CLOSE_DURATION = 280;
+const REMOVE_DURATION = 380;
 
 export function ReviewCard({ review, onRemove, onUpdate, onClickCheck }: ReviewCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
   const closingTimer = useRef<ReturnType<typeof setTimeout>>();
+  const removingTimer = useRef<ReturnType<typeof setTimeout>>();
 
-  useEffect(() => () => clearTimeout(closingTimer.current), []);
+  useEffect(() => () => {
+    clearTimeout(closingTimer.current);
+    clearTimeout(removingTimer.current);
+  }, []);
 
   useEffect(() => {
     if (!isExpanded || isClosing) return;
@@ -93,13 +99,14 @@ export function ReviewCard({ review, onRemove, onUpdate, onClickCheck }: ReviewC
         />
       )}
 
-      <div className={`review-card-container${isExpanded ? " expanded" : ""}${isClosing ? " closing" : ""}`}>
+      <div className={`review-card-container${isExpanded ? " expanded" : ""}${isClosing ? " closing" : ""}${isRemoving ? " removing" : ""}`}>
         {!isExpanded && (
           <button
             className="remove-btn"
             onClick={(e) => {
               e.stopPropagation();
-              onRemove();
+              setIsRemoving(true);
+              removingTimer.current = setTimeout(onRemove, REMOVE_DURATION);
             }}
           >
             x

@@ -1,6 +1,6 @@
 .login-container input,
 .login-btn {
-  box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: -3px 3px 8px rgba(0, 0, 0, 0.25);
 }
 
 .app {
@@ -48,17 +48,20 @@
 }
 
 .login-input {
-  background-color: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(0.5px);
+  background: linear-gradient(180deg, #cec6b4 0%, #ece7df 100%);
   padding: 0.8rem;
   border-radius: 8px;
-  color: var(--main-black);
+  color: #1e1e1e;
   font-family: inherit;
+  border: 1px solid #9a8f7a;
+  border-top-color: #736a58;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.18), 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
 .login-input:focus {
-  outline: 2px solid var(--main-black);
-  background-color: rgba(255, 255, 255, 0.5);
+  outline: none;
+  border-color: #4a80cc;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.15), 0 0 5px rgba(74, 128, 204, 0.4), 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
 .app a {
@@ -80,9 +83,13 @@
 }
 
 .login-btn {
-  background: rgba(0, 0, 0, 0.1);
-  color: var(--main-black);
-  border: 0;
-  padding: 0.4rem 1.2rem;
-  border-radius: 8px;
+  background: linear-gradient(180deg, #6ec45d 0%, #3d8b2e 45%, #2d6e20 46%, #3f8f30 100%);
+  color: white;
+  border: 1px solid #1e5c14;
+  padding: 0.5rem 1.8rem;
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
