@@ -6,6 +6,12 @@ import type { AuthRequest } from "@/middlewares/auth.middleware";
 async function create(req: AuthRequest, res: Response) {
   const user = req.user;
   if (!user) return res.status(401).json({ error: "Usuário não autenticado" });
+
+  const foundUser = await findUserById(user.sub);
+  if (foundUser.length === 0) {
+    return res.status(401).json({ error: "Usuário não encontrado" });
+  }
+
   const data = req.body;
   if (!data) return res.status(400).json({ error: "Dados não fornecidos" });
 
