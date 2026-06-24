@@ -1,17 +1,36 @@
 import { useState } from "react";
 
 interface ReviewFilterProps {
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (value: string) => void;
 }
 
 export function ReviewFilter({ onChange }: ReviewFilterProps) {
+  const [active, setActive] = useState("false");
+
+  const select = (value: string) => {
+    setActive(value);
+    onChange(value);
+  };
+
   return (
     <div className="filter-input-container">
-      <span>Mostrar:</span>
-      <select className="filter-input" onChange={onChange}>
-        <option value="false">todas</option>
-        <option value="true">por dia</option>
-      </select>
+      <span className="filter-label">Mostrar:</span>
+      <div className="segmented-control">
+        <button
+          type="button"
+          className={`segment${active === "false" ? " active" : ""}`}
+          onClick={() => select("false")}
+        >
+          todas
+        </button>
+        <button
+          type="button"
+          className={`segment${active === "true" ? " active" : ""}`}
+          onClick={() => select("true")}
+        >
+          por dia
+        </button>
+      </div>
     </div>
   );
 }

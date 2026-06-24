@@ -6,6 +6,14 @@
   max-width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
+  box-shadow:
+  0 24px 60px rgba(0, 0, 0, 0.40),
+  0 10px 28px rgba(0, 0, 0, 0.25),
+  0  4px 10px rgba(0, 0, 0, 0.50),
+  inset 0  4px  6px rgba(255, 255, 255, 0.04),
+  inset  4px 0  6px rgba(255, 255, 255, 0.04),
+  inset 0 -5px  9px rgba(0, 0, 0, 0.35),
+  inset -5px 0  9px rgba(0, 0, 0, 0.25);
 }
 
 .react-calendar--doubleView {
@@ -79,7 +87,6 @@
   font: inherit;
   font-size: 0.75em;
   font-weight: bold;
-  background: linear-gradient(to bottom, #edeff0 0%, #d6dadd 100%);
 }
 
 .react-calendar__month-view__weekdays__weekday {

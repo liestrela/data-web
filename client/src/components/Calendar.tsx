@@ -8,11 +8,12 @@ interface CalendarProps {
   date: DateValue;
   onChange: (date: DateValue) => void;
   tileClassName: ({ date, view }: { date: Date; view: string }) => string;
+  closing?: boolean;
 }
 
-export function Calendar({ date, onChange, tileClassName }: CalendarProps) {
+export function Calendar({ date, onChange, tileClassName, closing }: CalendarProps) {
   return (
-    <div className="calendar">
+    <div className={`calendar${closing ? " closing" : ""}`}>
       <ReactCalendar
         onChange={onChange}
         tileClassName={tileClassName}

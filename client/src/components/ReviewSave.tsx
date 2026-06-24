@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { addHours, addDays, addWeeks, addMonths } from "date-fns";
-import { Schedule } from "../rschedule";
+import { Schedule, Rule } from "../rschedule";
 import { v4 as uuidv4 } from "uuid";
 
 import type { TimeUnit, Review, ReviewPeriod } from "../types";
@@ -9,6 +9,11 @@ import { ReviewPeriodInput } from "./ReviewPeriodInput";
 interface ReviewSaveProps {
   onSaveReview: (review: Review) => void;
 }
+
+type PeriodEntry = { key: number; period: ReviewPeriod };
+
+const unitToFrequency = (unit: TimeUnit): "HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" =>
+  ({ horas: "HOURLY", dias: "DAILY", semanas: "WEEKLY", meses: "MONTHLY" } as const)[unit];
 
 const dateFromNow = (period: ReviewPeriod) => {
   const now = new Date();
@@ -30,40 +35,59 @@ const dateFromNow = (period: ReviewPeriod) => {
 
 export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
   const [subject, setSubject] = useState("");
-  const [periods, setPeriods] = useState<ReviewPeriod[]>([
-    { many: 3, unit: "dias" },
+  const [periods, setPeriods] = useState<PeriodEntry[]>([
+    { key: 0, period: { many: 3, unit: "dias" } },
   ]);
+  const [removingKeys, setRemovingKeys] = useState<Set<number>>(new Set());
+  const nextKey = useRef(1);
 
   const handleAddPeriod = () => {
-    setPeriods([...periods, { many: 1, unit: "dias" }]);
+    const key = nextKey.current++;
+    setPeriods((prev) => [...prev, { key, period: { many: 1, unit: "dias" } }]);
   };
 
-  const handlePeriodChange = (index: number, updatedPeriod: ReviewPeriod) => {
-    setPeriods(periods.map((p, i) => (i === index ? updatedPeriod : p)));
+  const handlePeriodChange = (key: number, updatedPeriod: ReviewPeriod) => {
+    setPeriods((prev) => prev.map((e) => (e.key === key ? { ...e, period: updatedPeriod } : e)));
   };
 
-  const handleRemovePeriod = (index: number) => {
-    setPeriods(periods.filter((_, i) => i !== index));
+  const handleRemovePeriod = (key: number) => {
+    setRemovingKeys((prev) => new Set(prev).add(key));
+    setTimeout(() => {
+      setPeriods((prev) => prev.filter((e) => e.key !== key));
+      setRemovingKeys((prev) => {
+        const next = new Set(prev);
+        next.delete(key);
+        return next;
+      });
+    }, 220);
   };
 
   const handleSave = () => {
-    if (!subject.trim() || periods.length === 0) return;
+    const activePeriods = periods
+      .filter((e) => !removingKeys.has(e.key))
+      .map((e) => e.period);
 
-    const schedule = new Schedule({
-      rdates: periods.map((period) => dateFromNow(period)),
-    });
+    if (!subject.trim() || activePeriods.length === 0) return;
+
+    const rdates = activePeriods.filter((p) => !p.recurrent).map(dateFromNow);
+    const rrules = activePeriods
+      .filter((p) => p.recurrent)
+      .map((p) => new Rule({ frequency: unitToFrequency(p.unit), interval: p.many, start: dateFromNow(p) }));
+
+    const schedule = new Schedule({ rdates, rrules });
 
     const newReview: Review = {
       id: uuidv4(),
       subject,
-      periods,
+      periods: activePeriods,
       schedule,
     };
 
     onSaveReview(newReview);
 
     setSubject("");
-    setPeriods([{ many: 3, unit: "dias" }]);
+    setPeriods([{ key: nextKey.current++, period: { many: 3, unit: "dias" } }]);
+    setRemovingKeys(new Set());
   };
 
   return (
@@ -90,13 +114,14 @@ export function ReviewSave({ onSaveReview }: ReviewSaveProps) {
 
         <div className="review-periods-container">
           <h2>Quando revisar?</h2>
-          {periods.map((period, index) => (
+          {periods.map((entry) => (
             <ReviewPeriodInput
-              key={index}
-              period={period}
-              onChange={(updated) => handlePeriodChange(index, updated)}
-              onRemove={() => handleRemovePeriod(index)}
-              canRemove={periods.length > 1}
+              key={entry.key}
+              period={entry.period}
+              onChange={(updated) => handlePeriodChange(entry.key, updated)}
+              onRemove={() => handleRemovePeriod(entry.key)}
+              canRemove={periods.length > 1 && !removingKeys.has(entry.key)}
+              isRemoving={removingKeys.has(entry.key)}
             />
           ))}
           <button

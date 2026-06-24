@@ -8,6 +8,7 @@ export type DateValue = DateValuePiece | [DateValuePiece, DateValuePiece];
 export interface ReviewPeriod {
   many: number;
   unit: TimeUnit;
+  recurrent?: boolean;
 }
 
 export interface Review {

@@ -67,6 +67,7 @@ export function Register() {
 
   return (
     <div className="app">
+      <div className="auth-box">
       <h1>Registrar</h1>
       <form onSubmit={(e) => { e.preventDefault(); registerUser(); }}>
         <div className="login-container">
@@ -153,6 +154,7 @@ export function Register() {
           Registrar
         </button>
       </form>
+      </div>
     </div>
   );
 }

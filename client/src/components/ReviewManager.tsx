@@ -1,20 +1,23 @@
 import { useState, useRef, useEffect } from "react";
 import { startOfWeek, endOfWeek } from "date-fns";
 import type { Review, DateValue } from "../types";
-import type { ChangeEvent } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Schedule } from "../rschedule";
+import { Schedule, Rule } from "../rschedule";
 
 import ReviewFilter from "./ReviewFilter";
 import ReviewSave from "./ReviewSave";
 import ReviewViewer from "./ReviewViewer";
 import ReviewBrief from "./ReviewBrief";
 import Calendar from "./Calendar";
+import ExportButton from "./ExportButton";
 
 export function ReviewManager() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [selectedDate, setSelectedDate] = useState<DateValue>(new Date());
   const [byDay, setByDay] = useState(false);
+  const [calendarVisible, setCalendarVisible] = useState(false);
+  const [calendarClosing, setCalendarClosing] = useState(false);
+  const calendarTimer = useRef<ReturnType<typeof setTimeout>>();
   const viewerRef = useRef<{ scrollToIndex: (index: number) => void }>(null);
   const { authToken } = useAuth();
 
@@ -32,12 +35,22 @@ export function ReviewManager() {
         if (response.ok) {
           const data = await response.json();
           const parsedReviews = data.map((card: any) => {
-            const rdatesDates = card.schedule?.rdates?.datetimes?.map((dt: any) => 
+            const rdatesDates = card.schedule?.rdates?.datetimes?.map((dt: any) =>
               new Date(dt.year, dt.month - 1, dt.day, dt.hour, dt.minute, dt.second, dt.millisecond)
             ) || [];
-            
+
+            const rruleData: any[] = card.schedule?.rrules ?? [];
+            const rrules = rruleData
+              .filter((r: any) => r?.options?.frequency)
+              .map((r: any) => new Rule({
+                frequency: r.options.frequency,
+                interval: r.options.interval ?? 1,
+                start: new Date(r.options.start),
+              }));
+
             const schedule = new Schedule({
-                rdates: rdatesDates
+              rdates: rdatesDates,
+              rrules,
             });
 
             return {
@@ -169,8 +182,21 @@ export function ReviewManager() {
     );
   };
 
-  const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setByDay(e.target.value === "true");
+  const handleFilterChange = (value: string) => {
+    const newByDay = value === "true";
+    if (newByDay) {
+      clearTimeout(calendarTimer.current);
+      setByDay(true);
+      setCalendarVisible(true);
+      setCalendarClosing(false);
+    } else {
+      setCalendarClosing(true);
+      calendarTimer.current = setTimeout(() => {
+        setByDay(false);
+        setCalendarVisible(false);
+        setCalendarClosing(false);
+      }, 200);
+    }
   };
 
   const handleScroll = (index: number) => {
@@ -216,7 +242,10 @@ export function ReviewManager() {
 
   return (
     <div className="review-manager-container">
-      <ReviewFilter onChange={handleFilterChange} />
+      <div className="filter-row">
+        <ReviewFilter onChange={handleFilterChange} />
+        <ExportButton reviews={reviews} />
+      </div>
       <div className="review-manager">
         <ReviewSave onSaveReview={onSaveReview} />
 
@@ -224,11 +253,12 @@ export function ReviewManager() {
 
         <div className="reviews-container-border">
           <div className="reviews-container">
-            {byDay && (
+            {calendarVisible && (
               <Calendar
                 date={selectedDate}
                 onChange={setSelectedDate}
                 tileClassName={getTileClassName}
+                closing={calendarClosing}
               />
             )}
             <ReviewViewer

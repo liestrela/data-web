@@ -132,7 +132,7 @@ export function ReviewCard({ review, onRemove, onUpdate, onClickCheck }: ReviewC
           </div>
           {!isExpanded && (
             <span className="review-note">
-              {review.notes ? cutString(review.notes, 40) : "(sem anotações)"}
+              {review.notes || "(sem anotações)"}
             </span>
           )}
 
@@ -156,7 +156,9 @@ export function ReviewCard({ review, onRemove, onUpdate, onClickCheck }: ReviewC
               <ul className="period-list">
                 {review.periods.map((period, index) => (
                   <li key={index} className="period-badge">
-                    Daqui a {period.many} {period.unit}
+                    {period.recurrent
+                      ? `A cada ${period.many} ${period.unit}`
+                      : `Daqui a ${period.many} ${period.unit}`}
                   </li>
                 ))}
               </ul>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -7,6 +7,22 @@ import defaultUserImage from "../assets/default.svg";
 export function Navbar() {
   const { authToken, logout } = useAuth();
   const [userDropdown, setUserDropdown] = useState(false);
+  const [dropdownClosing, setDropdownClosing] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  const toggleDropdown = () => {
+    if (userDropdown) {
+      setDropdownClosing(true);
+      closeTimer.current = setTimeout(() => {
+        setUserDropdown(false);
+        setDropdownClosing(false);
+      }, 180);
+    } else {
+      clearTimeout(closeTimer.current);
+      setDropdownClosing(false);
+      setUserDropdown(true);
+    }
+  };
 
   if (authToken) {
     return (
@@ -15,11 +31,11 @@ export function Navbar() {
         <img
           src={defaultUserImage}
           alt="Imagem do usuário"
-          onClick={() => setUserDropdown(!userDropdown)}
+          onClick={toggleDropdown}
         />
 
         {userDropdown && (
-          <div className="user_drop">
+          <div className={`user_drop${dropdownClosing ? " closing" : ""}`}>
             <ul>
               <li onClick={logout}>Logout</li>
             </ul>
